@@ -105,15 +105,7 @@ window.VencordNative = {
 
     pluginHelpers: {} as any,
 
-    fileSystem: {
-        readFileSync: (path: PathOrFileDescriptor, options: any = undefined) => readFileSync(path, options),
-        writeFileSync: (path: PathOrFileDescriptor, options: any = undefined) => writeFileSync(path, options),
-        statSync: (path: PathLike, options: any = undefined) => statSync(path, options),
-        readdirSync: (path: PathLike, options: any = undefined) => readdirSync(path, options)
-    },
+    fileSystem: {} as any,
 
-    mime: {
-        extension: (type: string) => extension(type),
-        lookup: (extension: string) => lookup(extension)
-    }
+    mime: {} as any
 };
