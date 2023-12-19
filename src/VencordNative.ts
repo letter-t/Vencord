@@ -7,9 +7,9 @@
 import { IpcEvents } from "@utils/IpcEvents";
 import { IpcRes } from "@utils/types";
 import { ipcRenderer } from "electron";
+import { PathLike,PathOrFileDescriptor, readdirSync, readFileSync, statSync, writeFileSync } from "fs";
 import { PluginIpcMappings } from "main/ipcPlugins";
 import type { UserThemeHeader } from "main/themes";
-import { readFileSync, writeFileSync, statSync, readdirSync, PathOrFileDescriptor, PathLike } from "fs";
 import { extension, lookup } from "mime-types";
 
 function invoke<T = any>(event: IpcEvents, ...args: any[]) {
