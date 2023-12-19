@@ -7,8 +7,9 @@
 import { IpcEvents } from "@utils/IpcEvents";
 import { IpcRes } from "@utils/types";
 import { ipcRenderer } from "electron";
-import { PluginIpcMappings } from "main/ipcPlugins";
 import type { UserThemeHeader } from "main/themes";
+import { readFileSync, writeFileSync, statSync, readdirSync, PathOrFileDescriptor, PathLike } from "fs";
+import { extension, lookup } from "mime-types";
 
 function invoke<T = any>(event: IpcEvents, ...args: any[]) {
     return ipcRenderer.invoke(event, ...args) as Promise<T>;
@@ -16,16 +17,6 @@ function invoke<T = any>(event: IpcEvents, ...args: any[]) {
 
 export function sendSync<T = any>(event: IpcEvents, ...args: any[]) {
     return ipcRenderer.sendSync(event, ...args) as T;
-}
-
-const PluginHelpers = {} as Record<string, Record<string, (...args: any[]) => Promise<any>>>;
-const pluginIpcMap = sendSync<PluginIpcMappings>(IpcEvents.GET_PLUGIN_IPC_METHOD_MAP);
-
-for (const [plugin, methods] of Object.entries(pluginIpcMap)) {
-    const map = PluginHelpers[plugin] = {};
-    for (const [methodName, method] of Object.entries(methods)) {
-        map[methodName] = (...args: any[]) => invoke(method as IpcEvents, ...args);
-    }
 }
 
 export default {
@@ -72,5 +63,22 @@ export default {
         openExternal: (url: string) => invoke<void>(IpcEvents.OPEN_EXTERNAL, url)
     },
 
-    pluginHelpers: PluginHelpers
+    pluginHelpers: {
+        OpenInApp: {
+            resolveRedirect: (url: string) => invoke<string>(IpcEvents.OPEN_IN_APP__RESOLVE_REDIRECT, url),
+        },
+        VoiceMessages: {
+            readRecording: (path: string) => invoke<Uint8Array | null>(IpcEvents.VOICE_MESSAGES_READ_RECORDING, path),
+        },
+        fileSystem: {
+            readFileSync: (path: PathOrFileDescriptor, options: any = undefined) => readFileSync(path, options),
+            writeFileSync: (path: PathOrFileDescriptor, options: any = undefined) => writeFileSync(path, options),
+            statSync: (path: PathLike, options: any = undefined) => statSync(path, options),
+            readdirSync: (path: PathLike, options: any = undefined) => readdirSync(path, options)
+        },
+        mime: {
+            extension: (type: string) => extension(type),
+            lookup: (extension: string) => lookup(extension)
+        }
+    }
 };
