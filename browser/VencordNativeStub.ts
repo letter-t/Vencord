@@ -107,5 +107,7 @@ window.VencordNative = {
 
     fileSystem: {} as any,
 
-    mime: {} as any
+    mime: {} as any,
+
+    path: {} as any
 };

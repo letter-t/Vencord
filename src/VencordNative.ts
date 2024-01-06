@@ -11,6 +11,7 @@ import { PathLike, PathOrFileDescriptor, readdirSync, readFileSync, statSync, wr
 import { PluginIpcMappings } from "main/ipcPlugins";
 import type { UserThemeHeader } from "main/themes";
 import { extension, lookup } from "mime-types";
+import { resolve } from "path";
 
 function invoke<T = any>(event: IpcEvents, ...args: any[]) {
     return ipcRenderer.invoke(event, ...args) as Promise<T>;
@@ -86,5 +87,9 @@ export default {
     mime: {
         extension: (type: string) => extension(type),
         lookup: (extension: string) => lookup(extension)
+    },
+
+    path: {
+        resolve: (...paths: string[]) => resolve(...paths)
     }
 };
