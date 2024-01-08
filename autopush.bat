@@ -11,9 +11,9 @@ git add .
 
 ::Prompt for commit message
 echo:
-echo Enter commit message ^(default is 'autopush.bat commit'^)^:
+echo Enter commit message ^(default is 'autopush commit'^)^:
 set /p "message="
-if not defined message set "message=autopush.bat commit"
+if not defined message set "message=autopush commit"
 echo:
 
 ::Commit all changes
