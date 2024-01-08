@@ -23,11 +23,9 @@ import monacoHtmlLocal from "~fileContent/monacoWin.html";
 import monacoHtmlCdn from "~fileContent/../src/main/monacoWin.html";
 import * as DataStore from "../src/api/DataStore";
 import { debounce } from "../src/utils";
-import { PathLike, PathOrFileDescriptor, readdirSync, readFileSync, statSync, writeFileSync } from "fs";
 import { EXTENSION_BASE_URL } from "../src/utils/web-metadata";
 import { getTheme, Theme } from "../src/utils/discord";
 import { getThemeInfo } from "../src/main/themes";
-import { extension, lookup } from "mime-types";
 
 // Discord deletes this so need to store in variable
 const { localStorage } = window;

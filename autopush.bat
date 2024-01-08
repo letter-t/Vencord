@@ -1,4 +1,5 @@
 @echo off
+
 ::Initialize GitHub
 git init
 
@@ -9,12 +10,14 @@ git pull
 git add .
 
 ::Prompt for commit message
+echo:
 echo Enter commit message ^(default is 'autopush.bat commit'^)^:
 set /p "message="
 if not defined message set "message=autopush.bat commit"
+echo:
 
 ::Commit all changes
-git commit -m %message%
+git commit -m "%message%"
 
 ::Push all changes to GitHub 
 git push
