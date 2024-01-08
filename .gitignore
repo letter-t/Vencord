@@ -19,6 +19,7 @@ lerna-debug.log*
 *.tsbuildinfo
 
 src/userplugins/Project2
+autopush.bat
 
 ExtensionCache/
 settings/

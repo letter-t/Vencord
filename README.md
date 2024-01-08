@@ -9,7 +9,6 @@
     -   AvatarHover (shows an enlarged version of profile pictures, emojis, and more when holding Ctrl)
     -   AutoBypass (bypasses chat filters for many automoderation bots) (PLEASE USE RESPONSIBLY)
     -   \[HIDDEN\] Project2 (hidden due to its potential to be modified and used for raiding)
--   autopush.bat added to make commits easier
 -   NOTE: all changes made to VencordNative.ts, VencordNativeStub.ts, package.json, and pnpm-lock.yaml are only required for Project2 (which is not present here)
 
 
@@ -21,7 +20,7 @@ Check out [Vencord's Installation Guide](https://github.com/Vendicated/Vencord/b
 ## Vendicated's Vencord
 
 <https://github.com/Vendicated/Vencord>\
-[You should check out the original NOW! ⚡⚡⚡](https://github.com/Vendicated/Vencord)\
+**[You should check out the original NOW! ⚡⚡⚡](https://github.com/Vendicated/Vencord)**\
 <https://github.com/Vendicated/Vencord>
 
 
