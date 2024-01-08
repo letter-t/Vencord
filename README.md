@@ -20,9 +20,9 @@ Check out [Vencord's Installation Guide](https://github.com/Vendicated/Vencord/b
 
 ## Vendicated's Vencord
 
-<https://github.com/Vendicated/Vencord>
-[You should check out the original NOW! ⚡⚡⚡](https://github.com/Vendicated/Vencord)
-<https://github.com/Vendicated/Vencord>
+<https://github.com/Vendicated/Vencord>\
+[You should check out the original NOW! ⚡⚡⚡](https://github.com/Vendicated/Vencord)\
+<https://github.com/Vendicated/Vencord>\
 
 
 ## Disclaimer
