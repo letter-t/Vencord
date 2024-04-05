@@ -4,8 +4,9 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { IpcEvents } from "@utils/IpcEvents";
+import { IpcEvents } from "@shared/IpcEvents";
 import { IpcRes } from "@utils/types";
+import type { Settings } from "api/Settings";
 import { ipcRenderer } from "electron";
 import { PathLike, PathOrFileDescriptor, readdirSync, readFileSync, statSync, writeFileSync } from "fs";
 import { PluginIpcMappings } from "main/ipcPlugins";
@@ -49,8 +50,8 @@ export default {
     },
 
     settings: {
-        get: () => sendSync<string>(IpcEvents.GET_SETTINGS),
-        set: (settings: string) => invoke<void>(IpcEvents.SET_SETTINGS, settings),
+        get: () => sendSync<Settings>(IpcEvents.GET_SETTINGS),
+        set: (settings: Settings, pathToNotify?: string) => invoke<void>(IpcEvents.SET_SETTINGS, settings, pathToNotify),
         getSettingsDir: () => invoke<string>(IpcEvents.GET_SETTINGS_DIR),
     },
 
