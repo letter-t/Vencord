@@ -9,7 +9,7 @@ const qualifier: string = [".wrapper_d281dd, icon__0cbed", // <- guilds
     ".layout-1qmrhw .avatar-6qzftW", // <- voip, DM channels
     ".userInfo-2zN2z8 .avatar-3W3CeO, .avatar-2MSPKk", // <- friends list
     ".contents-2MsGLg .avatar-2e8lTP, .repliedMessage-3Z6XBG img, .replyAvatar_cea07c", // <- messages, embeds
-    ".wrapper_edb6e0, .avatar__6337f", // <- channel users
+    ".wrapper__3ed10, .avatar__6337f", // <- channel users
     ".callAvatarWrapper-3Ax_xH, .userAvatar_c4f005", // <- DM call, server VC
     ".avatar__08316, .avatarHoverTarget__3a360, .avatar__445f3", // <- modals, userpopout
     ".emojiContainer__4a804 .emoji, .repliedTextPreview__90311", // <- emojis, name icons
@@ -17,7 +17,7 @@ const qualifier: string = [".wrapper_d281dd, icon__0cbed", // <- guilds
     ".emojiItemMedium_a97ee4, .emojiSpriteImage__6363e", // <- emoji menu
     ".stickerAsset__00e6b", // <- stickers
     ".roleIcon_d491aa, .roleIcon__7599e", // <- role icons
-    ".icon_c48348", // <- mini guild pic
+    ".icon__94164", // <- mini guild pic
     ".assetsLargeImageUserPopout__6fc87, .assetsLargeImageUserPopoutV2__01dc1, .assetsLargeImageStreamPreview_db91fd", // <- playing on profile part 1
     ".assetsLargeImageStreamPreviewXbox_c549ba, .assetsLargeImageUserPopoutXbox__908da, .assetsLargeImageUserPopoutV2Xbox__32def", // <- playing on profile part 2
     ".customStatus__90402 .customStatusEmoji_fd509e", // <- emoji in custom status on big profile view
