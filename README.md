@@ -15,6 +15,7 @@
 ## Installing / Uninstalling
 
 Check out [Vencord's Installation Guide](https://github.com/Vendicated/Vencord/blob/main/docs/1_INSTALLING.md) and follow the steps, but replace the link in the `git clone` step with `https://github.com/letter-t/Vencord`
+Visit https://vencord.dev/download
 
 
 ## Vendicated's Vencord
@@ -22,6 +23,19 @@ Check out [Vencord's Installation Guide](https://github.com/Vendicated/Vencord/b
 <https://github.com/Vendicated/Vencord>\
 **[You should check out the original NOW! ⚡⚡⚡](https://github.com/Vendicated/Vencord)**\
 <https://github.com/Vendicated/Vencord>
+
+
+## Join Vencord's Support/Community Server
+
+https://discord.gg/D9uwnFnqmd
+
+
+## Sponsors
+
+|     **Thanks a lot to all Vencord [sponsors](https://github.com/sponsors/Vendicated)!!**     |
+| :------------------------------------------------------------------------------------------: |
+|   [![](https://meow.vendicated.dev/sponsors.png)](https://github.com/sponsors/Vendicated)    |
+| *generated using [github-sponsor-graph](https://github.com/Vendicated/github-sponsor-graph)* |
 
 
 ## Disclaimer
