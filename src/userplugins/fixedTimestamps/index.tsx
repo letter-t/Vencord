@@ -9,11 +9,23 @@ import { Flex } from "@components/Flex";
 import { Grid } from "@components/Grid";
 import { useForceUpdater } from "@utils/react";
 import definePlugin, { OptionType } from "@utils/types";
-import { Button, Forms, moment,React, Text, TextInput } from "@webpack/common";
-
+import { Button, Forms, moment, React, Text, TextInput } from "@webpack/common";
 interface TextReplaceProps {
     update: () => void;
 }
+type LongDateFormatKey =
+    | "LTS"
+    | "LT"
+    | "L"
+    | "LL"
+    | "LLL"
+    | "LLLL"
+    | "lts"
+    | "lt"
+    | "l"
+    | "ll"
+    | "lll"
+    | "llll";
 
 const pluginName = "FixedTimestamps";
 
@@ -22,7 +34,7 @@ function getFormattedTime(timeFormat: string): string {
 }
 
 function TextReplace({ update }: TextReplaceProps) {
-    function onClickReset(key: string) {
+    function onClickReset(key: LongDateFormatKey) {
         Settings.plugins[pluginName][key] = moment.localeData().longDateFormat(key);
         update();
     }
