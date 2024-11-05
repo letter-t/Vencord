@@ -4,20 +4,11 @@ import { useForceUpdater } from "@utils/react";
 import { Flex } from "@components/Flex";
 import { Grid } from "@components/Grid";
 import { Button, Forms, React, Text, TextInput, moment } from "@webpack/common";
-import { localeData } from "moment";
 
 interface TextReplaceProps {
     update: () => void;
 }
 
-let timeFormatsDefault: { [key: string]: string; } = {
-    LTS: localeData().longDateFormat("LTS"),
-    LT: localeData().longDateFormat("LT"),
-    L: localeData().longDateFormat("L"),
-    LL: localeData().longDateFormat("LL"),
-    LLL: localeData().longDateFormat("LLL"),
-    LLLL: localeData().longDateFormat("LLLL")
-};
 const pluginName = "FixedTimestamps";
 
 function getFormattedTime(timeFormat: string): string {
@@ -26,13 +17,13 @@ function getFormattedTime(timeFormat: string): string {
 
 function TextReplace({ update }: TextReplaceProps) {
     function onClickReset(key: string) {
-        Settings.plugins[pluginName][key] = timeFormatsDefault[key];
+        Settings.plugins[pluginName][key] = moment.localeData().longDateFormat(key);
         update();
     }
 
     function onChange(e: string, key: string) {
         if (e.match(/[S]{10}|[hms]{3}/g)) return; // without this, the settings menu becomes just a little bit inaccessible and the settings have to be changed with console commands. oopsies
-        //Vencord.Plugins.plugins.fixedTimestamps.LTS = ""
+        // The console command in question: Vencord.Plugins.plugins.fixedTimestamps.LTS = "h:mm:ss A";
         Settings.plugins[pluginName][key] = e;
         update();
     }
@@ -117,12 +108,12 @@ export default definePlugin({
     }],
     settings,
     async start() {
-        Settings.plugins[pluginName].LTS = Settings.plugins[pluginName].LTS ?? timeFormatsDefault.LTS;
-        Settings.plugins[pluginName].LT = Settings.plugins[pluginName].LT ?? timeFormatsDefault.LT;
-        Settings.plugins[pluginName].L = Settings.plugins[pluginName].L ?? timeFormatsDefault.L;
-        Settings.plugins[pluginName].LL = Settings.plugins[pluginName].LL ?? timeFormatsDefault.LL;
-        Settings.plugins[pluginName].LLL = Settings.plugins[pluginName].LLL ?? timeFormatsDefault.LLL;
-        Settings.plugins[pluginName].LLLL = Settings.plugins[pluginName].LLLL ?? timeFormatsDefault.LLLL;
+        Settings.plugins[pluginName].LTS = Settings.plugins[pluginName].LTS ?? moment.localeData().longDateFormat("LTS");
+        Settings.plugins[pluginName].LT = Settings.plugins[pluginName].LT ?? moment.localeData().longDateFormat("LT");
+        Settings.plugins[pluginName].L = Settings.plugins[pluginName].L ?? moment.localeData().longDateFormat("L");
+        Settings.plugins[pluginName].LL = Settings.plugins[pluginName].LL ?? moment.localeData().longDateFormat("LL");
+        Settings.plugins[pluginName].LLL = Settings.plugins[pluginName].LLL ?? moment.localeData().longDateFormat("LLL");
+        Settings.plugins[pluginName].LLLL = Settings.plugins[pluginName].LLLL ?? moment.localeData().longDateFormat("LLLL");
     },
     patches: [{
         find: "n(757143),n(653041),n(411104);var r=n(913527),i=n.n(r);",
@@ -145,67 +136,3 @@ export default definePlugin({
         };
     }
 });
-
-// this._dayOfMonthOrdinalParseLenient found at line 12, column 404014
-
-// var V={LTS:"h:mm:ss A"
-
-// ={LTS:"h:mm:ss A",LT:"h:mm A",L:"MM/DD/YYYY",LL:"MMMM D, YYYY",LLL:"MMMM D, YYYY h:mm A",LLLL:"dddd, MMMM D, YYYY h:mm A"};
-// (?<=\={)LTS:"h:mm:ss A",LT:"h:mm A",L:"MM/DD/YYYY",LL:"MMMM D, YYYY",LLL:"MMMM D, YYYY h:mm A",LLLL:"dddd, MMMM D, YYYY h:mm A"(?=};)
-
-// ${moment.locale()}
-
-// t.replace(/L[L|T|S]{0,3}/g
-
-
-// 55935:function(e
-
-//var r=n(913527),i=n.n(r),a=n(232551),s=n(706454);let o=864e5,l=Object.create(null);
-
-// let l = Object.create(null);
-// let r = "en:LT";
-// let i = l[r];
-// console.log(i);
-
-// Vencord.Webpack.Common.moment.toDate()
-
-//913527:
-
-// 232551: Z
-// n(757143),n(653041),n(411104);var r=n(913527),i=n.n(r);
-
-
-//533244:  pQ
-
-
-// Vencord.Webpack.wreq.m[232551].toString()
-
-
-
-// ,
-//     {
-//         find: "var r=n(913527),i=n.n(r),a=n(232551),s=n(706454);let o=864e5,l=Object.create(null);",
-//         replacement: [
-//             // patch var V in module 913527
-//             {
-//                 //match: /(?<=var V=){[^}]*}/,
-//                 //match: /(?<=\=\{)LTS:"h:mm:ss A",[^}]*(?=\}\;)/,
-//                 //match: /(?<=longDateFormat:){[^}]*}/,
-//                 match: /E\(e,"L LT"\)/g,
-//                 replace: "E(e,\"L LTS\")"
-//             }
-//         ]
-//     },
-//     {
-//         find: "t.replace(/L[L|T|S]{0,3}/g",
-//         replacement: [
-//             // patch var V in module 913527
-//             {
-//                 //match: /(?<=var V=){[^}]*}/,
-//                 //match: /(?<=\=\{)LTS:"h:mm:ss A",[^}]*(?=\}\;)/,
-//                 //match: /(?<=longDateFormat:){[^}]*}/,
-//                 match: /(?<=return )n.longDateFormat/g,
-//                 replace: "$self.getReplacementFormat()"
-//             }
-//         ]
-//     }

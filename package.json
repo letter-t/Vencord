@@ -45,11 +45,12 @@
         "virtual-merge": "^1.0.1"
     },
     "devDependencies": {
-        "@supabase/supabase-js": "^2.39.1",
         "@stylistic/eslint-plugin": "^2.6.1",
+        "@supabase/supabase-js": "^2.46.1",
         "@types/chrome": "^0.0.269",
         "@types/diff": "^5.2.1",
         "@types/lodash": "^4.17.7",
+        "@types/mime-types": "^2.1.4",
         "@types/node": "^22.0.3",
         "@types/react": "^18.3.3",
         "@types/react-dom": "^18.3.0",
@@ -64,8 +65,8 @@
         "eslint-plugin-simple-import-sort": "^12.1.1",
         "eslint-plugin-unused-imports": "^4.0.1",
         "highlight.js": "10.7.3",
-        "mime-types": "^2.1.35",
         "html-minifier-terser": "^7.2.0",
+        "mime-types": "^2.1.35",
         "moment": "^2.30.1",
         "puppeteer-core": "^22.15.0",
         "standalone-electron-types": "^1.0.0",

@@ -110,10 +110,4 @@ window.VencordNative = {
     },
 
     pluginHelpers: {} as any,
-
-    fileSystem: {} as any,
-
-    mime: {} as any,
-
-    path: {} as any
 };

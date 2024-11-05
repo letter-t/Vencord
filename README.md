@@ -10,7 +10,7 @@
     -   AvatarHover: shows an enlarged version of profile pictures, emojis, and more when holding Ctrl
     -   AutoBypass: bypasses chat filters for many automoderation bots (PLEASE USE RESPONSIBLY)
     -   \[HIDDEN\] Project2: hidden due to its potential to be modified and used for raiding
--   NOTE: all changes made to VencordNative.ts, VencordNativeStub.ts, package.json, and pnpm-lock.yaml are only required for Project2 (which is not present here) (I will be fixing these by adding a native.ts file in the folder for this plugin later)
+-   NOTE: all changes made to package.json and pnpm-lock.yaml are only required for Project2 (which is not present here)
 
 
 ## Installing / Uninstalling

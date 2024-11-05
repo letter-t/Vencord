@@ -4,15 +4,12 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { PluginIpcMappings } from "@main/ipcPlugins";
+import type { UserThemeHeader } from "@main/themes";
 import { IpcEvents } from "@shared/IpcEvents";
 import { IpcRes } from "@utils/types";
 import type { Settings } from "api/Settings";
 import { ipcRenderer } from "electron";
-import { PathLike, PathOrFileDescriptor, readdirSync, readFileSync, statSync, writeFileSync } from "fs";
-import { PluginIpcMappings } from "main/ipcPlugins";
-import type { UserThemeHeader } from "main/themes";
-import { extension, lookup } from "mime-types";
-import { resolve } from "path";
 
 function invoke<T = any>(event: IpcEvents, ...args: any[]) {
     return ipcRenderer.invoke(event, ...args) as Promise<T>;
@@ -76,21 +73,5 @@ export default {
         openExternal: (url: string) => invoke<void>(IpcEvents.OPEN_EXTERNAL, url)
     },
 
-    pluginHelpers: PluginHelpers,
-
-    fileSystem: {
-        readFileSync: (path: PathOrFileDescriptor, options: any = undefined) => readFileSync(path, options),
-        writeFileSync: (path: PathOrFileDescriptor, options: any = undefined) => writeFileSync(path, options),
-        statSync: (path: PathLike, options: any = undefined) => statSync(path, options),
-        readdirSync: (path: PathLike, options: any = undefined) => readdirSync(path, options)
-    },
-
-    mime: {
-        extension: (type: string) => extension(type),
-        lookup: (extension: string) => lookup(extension)
-    },
-
-    path: {
-        resolve: (...paths: string[]) => resolve(...paths)
-    }
+    pluginHelpers: PluginHelpers
 };
