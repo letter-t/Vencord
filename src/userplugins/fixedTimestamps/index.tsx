@@ -4,12 +4,12 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import definePlugin, { OptionType } from "@utils/types";
 import { definePluginSettings, Settings } from "@api/Settings";
-import { useForceUpdater } from "@utils/react";
 import { Flex } from "@components/Flex";
 import { Grid } from "@components/Grid";
-import { Button, Forms, React, Text, TextInput, moment } from "@webpack/common";
+import { useForceUpdater } from "@utils/react";
+import definePlugin, { OptionType } from "@utils/types";
+import { Button, Forms, moment,React, Text, TextInput } from "@webpack/common";
 
 interface TextReplaceProps {
     update: () => void;

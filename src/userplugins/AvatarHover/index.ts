@@ -4,8 +4,8 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import definePlugin from "@utils/types";
 import { copyWithToast } from "@utils/misc";
+import definePlugin from "@utils/types";
 
 var curKey: string | null = null,
     lastTarget: any = null,
@@ -29,17 +29,17 @@ const qualifier: string = [".wrapper_f90abb", // <- guilds
     ".customStatus__90402 .customStatusEmoji_fd509e", // <- emoji in custom status on big profile view
     ".embedAuthorIcon__6b055" // <- profile icon in bot messages
 ].filter(function (s) {
-    return s != null;
+    return s !== null;
 }).join(", ");
 
 function handleMouseOver({ type, target }: any) {
     if (!(target.matches(qualifier) || (target = target.closest(qualifier)))) {
         return;
     }
-    return updateHoverCard(("mouseover" === type) && target);
+    return updateHoverCard((type === "mouseover") && target);
 }
 async function updateHoverCard(target: any) {
-    const isShown = (curKey == "Control");
+    const isShown = (curKey === "Control");
     lastTarget = target;
 
     if (!document.getElementById("AvatarHoverCard")) {
@@ -66,18 +66,18 @@ async function updateHoverCard(target: any) {
     if (!url) return hoverCard.remove();
 
     Object.assign(hoverCard.style, {
-        backgroundColor: `rgba(18,18,18,0.7)`,
+        backgroundColor: "rgba(18,18,18,0.7)",
         backgroundImage: `url(${url})`,
-        border: `2px solid #651717`,
-        borderRadius: `4px`,
+        border: "2px solid #651717",
+        borderRadius: "4px",
         width: `${size}px`,
         height: `${size}px`,
         top: `${top}px`,
         left: `${left}px`,
-        position: `inherit`,
-        backgroundSize: `contain`,
-        backgroundRepeat: `no-repeat`,
-        backgroundPosition: `center`
+        position: "inherit",
+        backgroundSize: "contain",
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "center"
     });
 
     const avatarHover = document.getElementsByClassName("AvatarHover");
@@ -87,12 +87,12 @@ function getImgUrl(target: any): string | undefined {
     var url: string | null = null;
     if (target?.src) url = target?.src;
     if (!url) url = target.querySelector("img")?.src;
-    if (!url && target?.style.backgroundImage != "") url = target.style.backgroundImage.match(/(?<=url\(").*(?="\))/)?.[0] || null;
+    if (!url && target?.style.backgroundImage !== "") url = target.style.backgroundImage.match(/(?<=url\(").*(?="\))/)?.[0] || null;
     if (!url) return;
-    url = url.replace(/.*https\/(?=[^\/])/, "https://")
+    url = url.replace(/.*https\/(?=[^/])/, "https://")
         .replace("&quality=lossless", "")
         .replace(/(?<=\?size=)[0-9]+(?=\?|$)/, `${size * 2}`)
-        .replace(/(?<!size\=[0-9]+)$/, `?size=${size * 2}`)
+        .replace(/(?<!size=[0-9]+)$/, `?size=${size * 2}`)
         .replace(".webp", ".png")
         + "&quality=lossless";
     url = url.match(/(\/assets\/).*(\.svg)/)?.[0] || url;
@@ -105,7 +105,7 @@ function makeDiv() {
     avatarHover[0].appendChild(hoverCard);
 }
 async function copyUrl({ target }: any) {
-    const isShown = (curKey == "Control");
+    const isShown = (curKey === "Control");
     const url = getImgUrl(target);
     if (!(isShown && url)) return;
     copyWithToast(url, "Image copied to clipboard!");

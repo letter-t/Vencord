@@ -11,8 +11,8 @@ import {
     removePreEditListener,
     removePreSendListener
 } from "@api/MessageEvents";
-import definePlugin, { OptionType } from "@utils/types";
 import { definePluginSettings } from "@api/Settings";
+import definePlugin, { OptionType } from "@utils/types";
 
 const settings = definePluginSettings({
     badWords: {
@@ -32,8 +32,8 @@ const settings = definePluginSettings({
     }
 });
 
-const alphabet: string = "acehijopsxyABCEHIKMNOPSTXYZ", //abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ
-    alphaspoof: string = "асеһіјорѕхуАВСЕНІΚМΝОРЅТХΥΖ", //аbсdеfgһіјkӏmnорqrѕtuvwхуzАВСDЕFGНІJΚLМΝОРQRЅТUVWХΥΖ
+const alphabet: string = "acehijopsxyABCEHIKMNOPSTXYZ", // abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ
+    alphaspoof: string = "асеһіјорѕхуАВСЕНІΚМΝОРЅТХΥΖ", // аbсdеfgһіјkӏmnорqrѕtuvwхуzАВСDЕFGНІJΚLМΝОРQRЅТUVWХΥΖ
     filler: string = "‌";
 
 export default definePlugin({
