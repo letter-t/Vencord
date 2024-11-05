@@ -1,3 +1,9 @@
+/*
+ * Vencord, a Discord client mod
+ * Copyright (c) 2024 Vendicated and contributors*
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+
 import definePlugin, { OptionType } from "@utils/types";
 import { definePluginSettings, Settings } from "@api/Settings";
 import { useForceUpdater } from "@utils/react";

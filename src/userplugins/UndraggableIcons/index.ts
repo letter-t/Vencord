@@ -1,3 +1,9 @@
+/*
+ * Vencord, a Discord client mod
+ * Copyright (c) 2024 Vendicated and contributors*
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+
 import definePlugin from "@utils/types";
 
 const handler = (e): void => { e.preventDefault(); };
@@ -11,11 +17,11 @@ export default definePlugin({
     }],
     patches: [],
     start() {
-        document.addEventListener('dragstart', handler, true);
-        document.addEventListener('drop', handler, true);
+        document.addEventListener("dragstart", handler, true);
+        document.addEventListener("drop", handler, true);
     },
     stop() {
-        document.removeEventListener('dragstart', handler, true);
-        document.removeEventListener('drop', handler, true);
+        document.removeEventListener("dragstart", handler, true);
+        document.removeEventListener("drop", handler, true);
     },
 });

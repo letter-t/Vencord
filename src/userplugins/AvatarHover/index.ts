@@ -1,3 +1,9 @@
+/*
+ * Vencord, a Discord client mod
+ * Copyright (c) 2024 Vendicated and contributors*
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+
 import definePlugin from "@utils/types";
 import { copyWithToast } from "@utils/misc";
 
@@ -33,7 +39,7 @@ function handleMouseOver({ type, target }: any) {
     return updateHoverCard(("mouseover" === type) && target);
 }
 async function updateHoverCard(target: any) {
-    const isShown = (curKey == 'Control');
+    const isShown = (curKey == "Control");
     lastTarget = target;
 
     if (!document.getElementById("AvatarHoverCard")) {
@@ -81,14 +87,14 @@ function getImgUrl(target: any): string | undefined {
     var url: string | null = null;
     if (target?.src) url = target?.src;
     if (!url) url = target.querySelector("img")?.src;
-    if (!url && target?.style.backgroundImage != '') url = target.style.backgroundImage.match(/(?<=url\(").*(?="\))/)?.[0] || null;
+    if (!url && target?.style.backgroundImage != "") url = target.style.backgroundImage.match(/(?<=url\(").*(?="\))/)?.[0] || null;
     if (!url) return;
-    url = url.replace(/.*https\/(?=[^\/])/, 'https://')
-        .replace('&quality=lossless', '')
+    url = url.replace(/.*https\/(?=[^\/])/, "https://")
+        .replace("&quality=lossless", "")
         .replace(/(?<=\?size=)[0-9]+(?=\?|$)/, `${size * 2}`)
         .replace(/(?<!size\=[0-9]+)$/, `?size=${size * 2}`)
-        .replace('.webp', '.png')
-        + '&quality=lossless';
+        .replace(".webp", ".png")
+        + "&quality=lossless";
     url = url.match(/(\/assets\/).*(\.svg)/)?.[0] || url;
     return url;
 }
@@ -99,7 +105,7 @@ function makeDiv() {
     avatarHover[0].appendChild(hoverCard);
 }
 async function copyUrl({ target }: any) {
-    const isShown = (curKey == 'Control');
+    const isShown = (curKey == "Control");
     const url = getImgUrl(target);
     if (!(isShown && url)) return;
     copyWithToast(url, "Image copied to clipboard!");
@@ -137,18 +143,18 @@ export default definePlugin({
             zIndex: "99999"
         });
         document.body.appendChild(element);
-        document.addEventListener('mouseover', handleMouseOver);
-        document.addEventListener('mouseout', handleMouseOver);
-        document.addEventListener('keydown', handleKeyDown);
-        document.addEventListener('keyup', handleKeyUp);
-        document.addEventListener('mousedown', copyUrl);
+        document.addEventListener("mouseover", handleMouseOver);
+        document.addEventListener("mouseout", handleMouseOver);
+        document.addEventListener("keydown", handleKeyDown);
+        document.addEventListener("keyup", handleKeyUp);
+        document.addEventListener("mousedown", copyUrl);
     },
     stop() {
         element?.remove();
-        document.removeEventListener('mouseover', handleMouseOver);
-        document.removeEventListener('mouseout', handleMouseOver);
-        document.removeEventListener('keydown', handleKeyDown);
-        document.removeEventListener('keyup', handleKeyUp);
-        document.removeEventListener('mousedown', copyUrl);
+        document.removeEventListener("mouseover", handleMouseOver);
+        document.removeEventListener("mouseout", handleMouseOver);
+        document.removeEventListener("keydown", handleKeyDown);
+        document.removeEventListener("keyup", handleKeyUp);
+        document.removeEventListener("mousedown", copyUrl);
     },
 });

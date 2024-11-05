@@ -1,3 +1,9 @@
+/*
+ * Vencord, a Discord client mod
+ * Copyright (c) 2024 Vendicated and contributors*
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+
 import {
     addPreEditListener,
     addPreSendListener,
@@ -26,9 +32,9 @@ const settings = definePluginSettings({
     }
 });
 
-const alphabet: string = 'acehijopsxyABCEHIKMNOPSTXYZ', //abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ
-    alphaspoof: string = 'асеһіјорѕхуАВСЕНІΚМΝОРЅТХΥΖ', //аbсdеfgһіјkӏmnорqrѕtuvwхуzАВСDЕFGНІJΚLМΝОРQRЅТUVWХΥΖ
-filler: string = "‌";
+const alphabet: string = "acehijopsxyABCEHIKMNOPSTXYZ", //abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ
+    alphaspoof: string = "асеһіјорѕхуАВСЕНІΚМΝОРЅТХΥΖ", //аbсdеfgһіјkӏmnорqrѕtuvwхуzАВСDЕFGНІJΚLМΝОРQRЅТUVWХΥΖ
+    filler: string = "‌";
 
 export default definePlugin({
     name: "AutoBypass",
@@ -44,14 +50,14 @@ export default definePlugin({
         msg.content = msg.content.replace(
             RegExp(badWords.join("|"), "gi"),
             match => this.replacer(match)
-        )
+        );
     },
     replacer(word: string) {
         let idx: number;
         if (settings.store.changeLetters) {
-            word = word.split('').map(t => ((idx = alphabet.indexOf(t)) === -1) ? t : alphaspoof[idx]).join(',')
+            word = word.split("").map(t => ((idx = alphabet.indexOf(t)) === -1) ? t : alphaspoof[idx]).join(",");
         }
-        return word.replace(/,/g, _ => (settings.store.addFiller) ? filler.repeat(Math.ceil(3*Math.random())) : '')
+        return word.replace(/,/g, _ => (settings.store.addFiller) ? filler.repeat(Math.ceil(3 * Math.random())) : "");
     },
     start() {
         this.preSend = addPreSendListener((_, msg) => this.onSend(msg));
