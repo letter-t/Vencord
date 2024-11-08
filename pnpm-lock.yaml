@@ -16,9 +16,6 @@ importers:
 
   .:
     dependencies:
-      '@intrnl/xxhash64':
-        specifier: ^0.1.2
-        version: 0.1.2
       '@sapphi-red/web-noise-suppressor':
         specifier: 0.3.5
         version: 0.3.5
@@ -44,6 +41,9 @@ importers:
         specifier: ^1.0.1
         version: 1.0.1
     devDependencies:
+      '@intrnl/xxhash64':
+        specifier: ^0.1.2
+        version: 0.1.2
       '@stylistic/eslint-plugin':
         specifier: ^2.6.1
         version: 2.6.1(eslint@9.8.0(patch_hash=xm46kqcmdgzlmm4aifkfpxaho4))(typescript@5.5.4)

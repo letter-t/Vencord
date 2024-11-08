@@ -13,19 +13,7 @@ import { Button, Forms, moment, React, Text, TextInput } from "@webpack/common";
 interface TextReplaceProps {
     update: () => void;
 }
-type LongDateFormatKey =
-    | "LTS"
-    | "LT"
-    | "L"
-    | "LL"
-    | "LLL"
-    | "LLLL"
-    | "lts"
-    | "lt"
-    | "l"
-    | "ll"
-    | "lll"
-    | "llll";
+type LongDateFormatKey = | "LTS" | "LT" | "L" | "LL" | "LLL" | "LLLL" | "lts" | "lt" | "l" | "ll" | "lll" | "llll";
 
 const pluginName = "FixedTimestamps";
 
@@ -134,7 +122,7 @@ export default definePlugin({
         Settings.plugins[pluginName].LLLL = Settings.plugins[pluginName].LLLL ?? moment.localeData().longDateFormat("LLLL");
     },
     patches: [{
-        find: "n(757143),n(653041),n(411104);var r=n(913527),i=n.n(r);",
+        find: "ordinal:\"string\"",
         replacement: [
             // patch longDateFormat in module 232551
             {
