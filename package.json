@@ -35,7 +35,6 @@
         "testTsc": "tsc --noEmit"
     },
     "dependencies": {
-        "@intrnl/xxhash64": "^0.1.2",
         "@vap/core": "0.0.12",
         "@vap/shiki": "0.10.5",
         "fflate": "^0.8.2",
@@ -47,7 +46,7 @@
     "devDependencies": {
         "@intrnl/xxhash64": "^0.1.2",
         "@stylistic/eslint-plugin": "^2.12.1",
-        "@supabase/supabase-js": "^2.46.1",
+        "@supabase/supabase-js": "^2.48.1",
         "@types/chrome": "^0.0.287",
         "@types/diff": "^6.0.0",
         "@types/lodash": "^4.17.14",
