@@ -11,19 +11,19 @@ var curKey: string | null = null,
     lastTarget: any = null,
     element: HTMLDivElement | null = null;
 const size: number = 300;
-const qualifier: string = [".wrapper_f90abb", // <- guilds
-    ".layout_f9647d .avatar_f9647d", // <- voip, DM channels
-    ".userInfo_f3939d .avatar_f3939d, .avatar-2MSPKk", // <- friends list
-    ".contents_f9f2ca .avatar_f9f2ca, .repliedMessage_f9f2ca img, .replyAvatar_f9f2ca", // <- messages, embeds
-    ".wrapper_c51b4e, .avatar_e9f61e,   .avatar_f9f2ca", // <- channel users
-    ".callAvatarWrapper-3Ax_xH, .userAvatar_ac3629", // <- DM call, server VC
+const qualifier: string = [".wrapper__6e9f8", // <- guilds
+    ".avatar__07f91", // <- voip, DM channels
+    ".avatar__0a06e, .avatar__20a53", // <- friends list
+    ".contents_c19a55 .avatar_c19a55, .replyAvatar_c19a55, .emojiContainer__75abc", // <- messages, embeds
+    ".wrapper__44b0c, .avatar_c19a55", // <- channel users
+    ".callAvatarWrapper-3Ax_xH, .userAvatar__55bab", // <- DM call, server VC
     ".avatar_c51b4e, .avatarHoverTarget_f89da9, .avatar_ec3b75", // <- modals, userpopout
-    ".emojiContainer_bae8cb .emoji, .repliedTextPreview_f9f2ca", // <- emojis, name icons
+    ".emojiContainer_bae8cb .emoji, .repliedTextPreview_c19a55", // <- emojis, name icons
     ".reaction_fef95b .emoji, .emoji_f2bfbb, .emoji", // <- reactions
-    ".emojiItem_fbfedd, .emojiItemMedium_fbfedd", // <- emoji menu
-    ".stickerAsset_cb3343", // <- stickers
-    ".roleIcon_f9f2ca, .roleIcon_d5100b", // <- role icons
-    ".icon_a64689, .guildIcon_e58351", // <- mini guild pic
+    ".emojiItem_fc7141, .emojiItemMedium_fc7141", // <- emoji menu
+    ".stickerAsset__31fc2", // <- stickers
+    ".roleIcon__1e6f1", // <- role icons
+    ".guildIcon__48112", // <- mini guild pic
     ".assetsLargeImageUserPopout__6fc87, .assetsLargeImageUserPopoutV2__01dc1, .assetsLargeImageStreamPreview_db91fd", // <- playing on profile part 1
     ".assetsLargeImageStreamPreviewXbox_c549ba, .assetsLargeImageUserPopoutXbox__908da, .assetsLargeImageUserPopoutV2Xbox__32def", // <- playing on profile part 2
     ".customStatus__90402 .customStatusEmoji_fd509e", // <- emoji in custom status on big profile view
@@ -94,6 +94,7 @@ function getImgUrl(target: any): string | undefined {
         .replace(/(?<=\?size=)[0-9]+(?=\?|$)/, `${size * 2}`)
         .replace(/(?<!size=[0-9]+)$/, `?size=${size * 2}`)
         .replace(".webp", ".png")
+        .replace(/\.png\?size=[0-9]+&animated=true/, ".gif")
         + "&quality=lossless";
     url = url.match(/(\/assets\/).*(\.svg)/)?.[0] || url;
     return url;

@@ -18,6 +18,7 @@ type LongDateFormatKey = | "LTS" | "LT" | "L" | "LL" | "LLL" | "LLLL" | "lts" | 
 const pluginName = "FixedTimestamps";
 
 function getFormattedTime(timeFormat: string): string {
+    // Vencord.Webpack.Common.moment().calendar
     return moment().format(timeFormat);
 }
 
@@ -120,18 +121,32 @@ export default definePlugin({
         Settings.plugins[pluginName].LL = Settings.plugins[pluginName].LL ?? moment.localeData().longDateFormat("LL");
         Settings.plugins[pluginName].LLL = Settings.plugins[pluginName].LLL ?? moment.localeData().longDateFormat("LLL");
         Settings.plugins[pluginName].LLLL = Settings.plugins[pluginName].LLLL ?? moment.localeData().longDateFormat("LLLL");
+        moment.updateLocale(moment.locale(), {
+            longDateFormat: {
+                LTS: String(Settings.plugins[pluginName].LTS),
+                LT: String(Settings.plugins[pluginName].LT),
+                L: String(Settings.plugins[pluginName].L),
+                LL: String(Settings.plugins[pluginName].LL),
+                LLL: String(Settings.plugins[pluginName].LLL),
+                LLLL: String(Settings.plugins[pluginName].LLLL)
+            }
+        });
     },
     patches: [{
-        find: "eH={calendar:{sameDay:\"[Today at] LT\",",
+        // find: "eH={calendar:{sameDay:\"[Today at] LT\",",
+        find: "use moment.updateLocale(localeName, config) to change an existing locale",
         replacement: [
             // patch in module 913527
-            // {
-            //     // match: /longDateFormat:{[^}]+}/g,
-            //     // replace: "longDateFormat:$self.getReplacementFormat()"
-            //     // replace: "longDateFormat:{LTS:\"h:mm:ss.S A\",LT:\"h:mm :ss.S A\",L:Vencord.Api.Settings.Settings.plugins[\"FixedTimestamps\"][\"L\"],LL:Vencord.Api.Settings.Settings.plugins[\"FixedTimestamps\"][\"LL\"],LLL:Vencord.Api.Settings.Settings.plugins[\"FixedTimestamps\"][\"LLL\"],LLLL:Vencord.Api.Settings.Settings.plugins[\"FixedTimestamps\"][\"LLLL\"]}"
-            //     // replace: `longDateFormat:{LTS:${Settings.plugins[pluginName].LTS},LT:${Settings.plugins[pluginName].LT},L:${Settings.plugins[pluginName].L},LL:${Settings.plugins[pluginName].LL},LLL:${Settings.plugins[pluginName].LLL},LLLL:${Settings.plugins[pluginName].L}}`
-            //     // replace: "longDateFormat:{LTS:\"h:mm:ss.S A\",LT:\"h:mm :ss.S A\",L:\"MM/DD/YYYY\",LL:\"MMMM D, YYYY\",LLL:\"MMMM D, YYYY h:mm :ss.S A\",LLLL:\"dddd, MMMM D, YYYY h:mm :ss.S A\"}"
-            // },
+
+            // Vencord.Webpack.wreq.m[913527].toString()
+            {
+                // match: /longDateFormat:{[^}]+}/g,
+                match: /longDateFormat:[a-z],/g,
+                replace: "longDateFormat:$self.getReplacementFormat(),"
+                // replace: "longDateFormat:{LTS:\"h:mm:ss.S A\",LT:\"h:mm :ss.S A\",L:Vencord.Api.Settings.Settings.plugins[\"FixedTimestamps\"][\"L\"],LL:Vencord.Api.Settings.Settings.plugins[\"FixedTimestamps\"][\"LL\"],LLL:Vencord.Api.Settings.Settings.plugins[\"FixedTimestamps\"][\"LLL\"],LLLL:Vencord.Api.Settings.Settings.plugins[\"FixedTimestamps\"][\"LLLL\"]}"
+                // replace: `longDateFormat:{LTS:${Settings.plugins[pluginName].LTS},LT:${Settings.plugins[pluginName].LT},L:${Settings.plugins[pluginName].L},LL:${Settings.plugins[pluginName].LL},LLL:${Settings.plugins[pluginName].LLL},LLLL:${Settings.plugins[pluginName].L}}`
+                // replace: "longDateFormat:{LTS:\"h:mm:ss.S A\",LT:\"h:mm :ss.S A\",L:\"MM/DD/YYYY\",LL:\"MMMM D, YYYY\",LLL:\"MMMM D, YYYY h:mm :ss.S A\",LLLL:\"dddd, MMMM D, YYYY h:mm :ss.S A\"}"
+            },
             {
                 match: /this\._longDateFormat(?=\[)/g,
                 replace: "$self.getReplacementFormat()"
@@ -139,11 +154,19 @@ export default definePlugin({
             {
                 match: /\] LT"/g,
                 replace: "] \"+$self.getReplacementFormat().LT"
-            }
+            },
+            // {
+            //     match: /var j={[^}]+}/g,
+            //     replace: "var j={LTS:\"h:mm:ss.S A\",LT:\"h:mm :ss.S A\",L:\"MM/DD/YYYY\",LL:\"MMMM D, YYYY\",LLL:\"MMMM D, YYYY h:mm :ss.S A\",LLLL:\"dddd, MMMM D, YYYY h:mm :ss.S A\"}"
+            // }
+            // {
+            //     match: /r1.calendar=[a-z]+,/,
+            //     replace: "r1.calendar=Vencord.Webpack.Common.moment().calendar,"
+            // }
         ]
     },
     {
-        find: "ordinal:\"string\"",
+        find: "localeData.longFormatters",
         replacement: [
             // patch longDateFormat in module 232551
             {
@@ -188,10 +211,11 @@ export default definePlugin({
     {
         find: ",\"L LT\"",
         replacement: [
-            {
-                match: /"LTS"/g,
-                replace: "$self.getReplacementFormat().LTS"
-            },
+            // patch in 55935:
+            // {
+            //     match: /"LTS"/g,
+            //     replace: "$self.getReplacementFormat().LTS"
+            // },
             {
                 match: /"LT"/g,
                 replace: "$self.getReplacementFormat().LT"
@@ -200,10 +224,74 @@ export default definePlugin({
                 match: /"L"/g,
                 replace: "$self.getReplacementFormat().L"
             },
+            // {
+            //     match: /"LL"/g,
+            //     replace: "$self.getReplacementFormat().LL"
+            // },
             {
-                match: /"LL"/g,
-                replace: "$self.getReplacementFormat().LL"
+                match: /"LLL"/g,
+                replace: "$self.getReplacementFormat().LLL"
             },
+            // {
+            //     match: /"LLLL"/g,
+            //     replace: "$self.getReplacementFormat().LLLL"
+            // },
+            {
+                match: /"L LT"/g,
+                replace: "$self.getReplacementFormat().L+\" \"+$self.getReplacementFormat().LT"
+            }
+        ]
+    },
+    {
+        find: "observePostVisibilityAnalytics:",
+        replacement: [
+            // patch in 404616:
+            // {
+            //     match: /"LTS"/g,
+            //     replace: "$self.getReplacementFormat().LTS"
+            // },
+            // {
+            //     match: /"LT"/g,
+            //     replace: "$self.getReplacementFormat().LT"
+            // },
+            // {
+            //     match: /"L"/g,
+            //     replace: "$self.getReplacementFormat().L"
+            // },
+            // {
+            //     match: /"LL"/g,
+            //     replace: "$self.getReplacementFormat().LL"
+            // },
+            // {
+            //     match: /"LLL"/g,
+            //     replace: "$self.getReplacementFormat().LLL"
+            // },
+            {
+                match: /"LLLL"/g,
+                replace: "$self.getReplacementFormat().LLLL"
+            }
+        ]
+    },
+    {
+        find: "react-datepicker__navigation react-datepicker__navigation--years react-datepicker__navigation--years-upcoming",
+        replacement: [
+            // patch in 674091:
+            // {
+            //     match: /"LTS"/g,
+            //     replace: "$self.getReplacementFormat().LTS"
+            // },
+            // {
+            //     match: /"LT"/g,
+            //     replace: "$self.getReplacementFormat().LT"
+            // },
+            // {
+            //     match: /"L"/g,
+            //     replace: "$self.getReplacementFormat().L"
+            // },
+            // {
+            //     match: /"LL"/g,
+            //     replace: "$self.getReplacementFormat().LL"
+            // },
             {
                 match: /"LLL"/g,
                 replace: "$self.getReplacementFormat().LLL"
@@ -211,21 +299,17 @@ export default definePlugin({
             {
                 match: /"LLLL"/g,
                 replace: "$self.getReplacementFormat().LLLL"
-            },
-            {
-                match: /"L LT"/g,
-                replace: "$self.getReplacementFormat().L+\" \"+$self.getReplacementFormat().LT"
             }
         ]
     }],
     getReplacementFormat() {
         return {
-            LTS: Settings.plugins[pluginName].LTS,
-            LT: Settings.plugins[pluginName].LT,
-            L: Settings.plugins[pluginName].L,
-            LL: Settings.plugins[pluginName].LL,
-            LLL: Settings.plugins[pluginName].LLL,
-            LLLL: Settings.plugins[pluginName].LLLL
+            LTS: String(Settings.plugins[pluginName].LTS),
+            LT: String(Settings.plugins[pluginName].LT),
+            L: String(Settings.plugins[pluginName].L),
+            LL: String(Settings.plugins[pluginName].LL),
+            LLL: String(Settings.plugins[pluginName].LLL),
+            LLLL: String(Settings.plugins[pluginName].LLLL)
         };
         // return `{LTS:${Settings.plugins[pluginName].LTS},LT:${Settings.plugins[pluginName].LT},L:${Settings.plugins[pluginName].L},LL:${Settings.plugins[pluginName].LL},LLL:${Settings.plugins[pluginName].LLL},LLLL:${Settings.plugins[pluginName].L}}`
     }
