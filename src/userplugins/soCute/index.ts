@@ -31,7 +31,7 @@ const FRAMES = 12;
 const getFrames = makeLazy(() => Promise.all(
     Array.from(
         { length: FRAMES },
-        (_, i) => loadImage(`https://raw.githubusercontent.com/letter-t/Vencord/tree/main/src/userplugins/soCute/frames/socute${i}.gif`)
+        (_, i) => loadImage(`https://raw.githubusercontent.com/letter-t/Vencord/main/src/userplugins/soCute/frames/socute${i}.gif`)
     ))
 );
 
@@ -159,17 +159,23 @@ export default definePlugin({
                 for (let i = 0; i < FRAMES; i++) {
                     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-                    const j = i < FRAMES / 2 ? i : FRAMES - i;
+                    // const j = i < FRAMES / 2 ? i : FRAMES - i;
                     // const width = 0.8 + j * 0.02;
                     // const height = 0.8 - j * 0.05;
                     // const offsetX = (1 - width) * 0.5 + 0.1;
                     // const offsetY = 1 - height - 0.08;
-                    const width = 0.8;
-                    const height = 0.8;
-                    const offsetX = (1 - width) * 0.5 + 0.1;
-                    const offsetY = 1 - height - 0.08;
+                    // const j = 11;
+                    const width = [1.1, 1.32, 1.18, 0.80, 1.13, 0.90, 1.13, 1.13, 0.90, 1.10, 1.13, 1.13][i];
+                    const height = [1.1, 1.05, 1.18, 1.1, 1.13, 1.14, 1.13, 0.85, 1.14, 1.10, 1.13, 0.85][i];
+                    const offsetX = [-.22, -.08, -.05, -.21, -.06, -.06, -.09, 0, -.01, -.33, -.06, -0.08][i] + ((1 - width) * 0.5 + 0.1); // - i * 0.005
+                    const offsetY = [0.22, 0.08, 0.15, 0.22, 0.09, 0.12, .12, .08, 0.12, 0.31, .10, .10][i] + (1 - height - 0.08); // - i * 0.003
+                    const rotation = [-12, 0, 0, -14, 0, 0, 0, 0, 0, -22, 0, 0][i];
 
+                    // ctx.translate(offsetX + width / 2, offsetY + height / 2);
+                    ctx.rotate((rotation / 180) * 3.14159);
                     ctx.drawImage(avatar, offsetX * resolution, offsetY * resolution, width * resolution, height * resolution);
+                    // ctx.translate(0, 0);
+                    ctx.rotate(-(rotation / 180) * 3.14159);
                     ctx.drawImage(frames[i], 0, 0, resolution, resolution);
 
                     const { data } = ctx.getImageData(0, 0, resolution, resolution);
