@@ -36,7 +36,7 @@
 
 ## Installing / Uninstalling
 
-Check out [Vencord's Installation Guide](https://github.com/Vendicated/Vencord/blob/main/docs/1_INSTALLING.md) and follow the steps, but replace the link in the `git clone` step with `https://github.com/letter-t/Vencord`
+Check out [Vencord's Installation Guide](https://github.com/Vendicated/Vencord/blob/0fd094074941b8d9bb7c0349eec7efe80e196ae5/docs/1_INSTALLING.md) and follow the steps, but replace the link in the `git clone` step with `https://github.com/letter-t/Vencord`
 Visit https://vencord.dev/download
 
 
