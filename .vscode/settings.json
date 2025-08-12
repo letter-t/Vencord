@@ -19,5 +19,8 @@
             "type": "Gitea"
         }
     ],
-    "java.format.settings.url": "eclipse-formatter.xml"
+    "css.format.spaceAroundSelectorSeparator": true,
+    "[css]": {
+        "editor.defaultFormatter": "vscode.css-language-features"
+    }
 }
