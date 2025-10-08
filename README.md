@@ -144,7 +144,7 @@ If updating and reinjecting the fork like this doesn't fix an issue you're seein
 
 open terminal and run the following:
 ```bash
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh
 \. "$HOME/.nvm/nvm.sh"
 nvm install 22
 node -v
@@ -160,7 +160,7 @@ cd Vencord
 pnpm install --no-frozen-lockfile
 pnpm install --frozen-lockfile
 pnpm build --dev
-pnpm inject
+sudo pnpm inject
 ```
 
 You can see the new plugins in Discord by going to User Settings > Plugins.
@@ -173,7 +173,7 @@ When your Discord reverts back to not having this Vencord fork:
 cd Vencord
 git pull origin main
 pnpm build --dev
-pnpm inject
+sudo pnpm inject
 ```
 ###### Note: These commands can also fix an installation that isn't letting you get to the "update your vencord" button in Discord.
 
@@ -192,7 +192,7 @@ You'll need some version of Node.js for this. Installation via nvm is shown here
 nvm-sh:
 ```bash
 # Download and install nvm:
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh
 # in lieu of restarting the shell
 \. "$HOME/.nvm/nvm.sh"
 # Download and install Node.js:
@@ -218,7 +218,7 @@ cd Vencord
 pnpm install --no-frozen-lockfile
 pnpm install --frozen-lockfile
 pnpm build --dev
-pnpm inject
+sudo pnpm inject
 ```
 what each command does, in order:
 - creates a new folder at /Vencord and installs the contents of this github repo to it
@@ -241,7 +241,7 @@ Instructions for this below:
 cd Vencord
 git pull origin main
 pnpm build --dev
-pnpm inject
+sudo pnpm inject
 ```
 ###### Note: These commands can also fix an installation that isn't letting you get to the "update your vencord" button in Discord.
 
