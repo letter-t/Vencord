@@ -1,64 +1,258 @@
 # letter-t's Vencord Fork
 
-<<<<<<< HEAD
-(A fork of) The cutest Discord client mod
-=======
-![](https://img.shields.io/github/package-json/v/Vendicated/Vencord?style=for-the-badge&logo=github&logoColor=d3869b&label=&color=1d2021&labelColor=282828)
-[![Codeberg Mirror](https://img.shields.io/static/v1?style=for-the-badge&label=Codeberg%20Mirror&message=codeberg.org/Vee/cord&color=2185D0&logo=data:image/png;base64,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)](https://codeberg.org/Vee/cord)
->>>>>>> decb49fc0ab99f0cbf7f229738ddfcacbcf384ff
+A fork of Vencord for me to add some custom plugins.
 
-## Changes Made in this Fork
+Check out the original Vencord [here](https://github.com/Vendicated/Vencord)
 
-<<<<<<< HEAD
--   User plugins added:
-    -   FixedTimestamps: allows for editing the timestamp formats that Discord shows. Similar to the BetterDiscord plugin that allows you to change the timestamps shown on messages.
-    -   UndraggableIcons: makes server icons undraggable
-    -   AvatarHover: shows an enlarged version of profile pictures, emojis, and more when holding Ctrl
-    -   AutoBypass: bypasses chat filters for many automoderation bots (PLEASE USE RESPONSIBLY)
-    -   \[HIDDEN\] Project2: hidden due to its potential to be modified and used for raiding
--   NOTE: all changes made to package.json and pnpm-lock.yaml are only required for Project2 (which is not present here)
-=======
-![](https://github.com/user-attachments/assets/3fac98c0-c411-4d2a-97a3-13b7da8687a2)
+Kept up-to-date every few days; contact me (@letter_t on Discord) if you're having problems even after updating + reinjecting this fork
 
-## Features
+++Installation instructions for both Windows and Linux below++
 
--   Easy to install
--   [100+ built in plugins](https://vencord.dev/plugins)
--   Fairly lightweight despite the many inbuilt plugins
--   Excellent Browser Support: Run Vencord in your Browser via extension or UserScript
--   Works on any Discord branch: Stable, Canary or PTB all work
--   Custom CSS and Themes: Inbuilt css editor with support to import any css files (including BetterDiscord themes)
--   Privacy friendly: blocks Discord analytics & crash reporting out of the box and has no telemetry
--   Maintained very actively, broken plugins are usually fixed within 12 hours
--   Settings sync: Keep your plugins and their settings synchronised between devices / apps (optional)
->>>>>>> decb49fc0ab99f0cbf7f229738ddfcacbcf384ff
+## Custom Plugins
+-   **AutoHideMedia**: automatically hide images, gifs, videos, and stickers from certain users, or upon finding certain keywords in the link or file name
+-   **AutoHideKeywords**: automatically hide message text upon finding certain keywords in it
+-   **SoCute**: allows you to generate a gif of someone's profile picture being shaken around. added by request.
+-   **AvatarHover**: shows an enlarged version of profile pictures, emojis, and more when holding Ctrl
+-   **FixedTimestamps**: allows for editing the timestamp formats that Discord shows. Similar to the BetterDiscord plugin that allows you to change the timestamps shown on messages.
+-   **oneuro**: oneko, but with a small neuro following the cursor instead of a cat. added by request.
+-   **UndraggableIcons**: makes server icons undraggable
+-   **\[NOT PRESENT IN FORK\] Project2**: hidden due to its potential to be modified and used for raiding. not present in this repo, but some changes here are made to support it on my end.
 
+## Installation Guides
+<details>
+<summary>**Windows (TLDR version)**</summary>
 
-## Installing / Uninstalling
+open cmd or powershell window and enter these commands:
+```powershell
+winget install -e --id CoreyButler.NVMforWindows
+winget install --id Git.Git -e
+```
+close and re-open cmd/powershell (without using "Run as administrator")
+```powershell
+nvm install 22.20.0
+nvm use 22.20.0
 
-Check out [Vencord's Installation Guide](https://github.com/Vendicated/Vencord/blob/0fd094074941b8d9bb7c0349eec7efe80e196ae5/docs/1_INSTALLING.md) and follow the steps, but replace the link in the `git clone` step with `https://github.com/letter-t/Vencord`
-Visit https://vencord.dev/download
+git clone https://github.com/letter-t/Vencord
+cd Vencord
+pnpm install --no-frozen-lockfile
+pnpm install --frozen-lockfile
+pnpm build --dev
+pnpm inject
+```
 
+You can see the new plugins in Discord by going to User Settings > Plugins.
 
-## Vendicated's Vencord
+#### :warning: **DISCORD UPDATES WILL OCCASIONALLY REMOVE VENCORD!!** :warning: 
+When your Discord reverts back to not having this Vencord fork:
 
-<https://github.com/Vendicated/Vencord>\
-**[You should check out the original NOW! ⚡⚡⚡](https://github.com/Vendicated/Vencord)**\
-<https://github.com/Vendicated/Vencord>
+open new cmd/powershell window as non-admin, then enter these commands:
+```powershell
+cd Vencord
+git pull origin main
+pnpm build --dev
+pnpm inject
+```
+###### Note: These commands can also fix an installation that isn't letting you get to the "update your vencord" button in Discord.
 
+If updating and reinjecting the fork like this doesn't fix an issue you're seeing, contact me (@letter_t on discord)
 
-## Join Vencord's Support/Community Server
+</details>
 
-https://discord.gg/D9uwnFnqmd
+<details>
+<summary>**Windows (full explanation)**</summary>
 
+You'll need some version of Node.js for this. I'd recommend using nvm-windows (Node Version Manager for Windows), but a standalone install works fine too.
 
-## Sponsors
+For installing Node.js with **nvm-windows**:
+- go to https://github.com/coreybutler/nvm-windows/releases and download nvm-setup.exe
+- run the exe
+- open a new cmd or powershell or terminal window (you may need to close other cmd/powershell/terminal windows you have open before this)
+- do `nvm version` to check if nvm is installed and working
+- do `nvm install 22.20.0` (or any version; `nvm install latest` also works)
+- do `nvm use 22.20.0` (or whatever version you got)
+- do `node -v` to check if node.js has been installed properly
+- do `pnpm -v` to check if pnpm works (should come with the node installation)
 
-|     **Thanks a lot to all Vencord [sponsors](https://github.com/sponsors/Vendicated)!!**     |
-| :------------------------------------------------------------------------------------------: |
-|   [![](https://meow.vendicated.dev/sponsors.png)](https://github.com/sponsors/Vendicated)    |
-| *generated using [github-sponsor-graph](https://github.com/Vendicated/github-sponsor-graph)* |
+For installing **Node.js directly**:
+- go to https://nodejs.org/en/download and click the green button that says "Windows Installer (.msi)"
+- run the msi
+- open a new cmd or powershell or terminal window (you may need to close other cmd/powershell/terminal windows you have open before this)
+- do `node -v` to check if node.js has been installed properly
+- do `pnpm -v` to check if pnpm works (should come with the node installation)
 
+You should now have node.js and pnpm installed on your system.
+
+You'll also need to have some version of git on your system as well:
+- go to https://git-scm.com/downloads/win
+- either download and run the .exe, or open a cmd/powershell window and run the `winget install --id Git.Git -e --source winget` command they show
+- close and reopen your cmd/powershell windows to make sure git applies
+- do `git -v` to check if git was installed properly
+
+Next, run these commands in a cmd/powershell window to download this fork locally to your device at `C:\Users\[yourcurrentuser]\Vencord\` (any location works, but you'll have to change the `cd Vencord` line to match the new filepath)
+```powershell
+git clone https://github.com/letter-t/Vencord
+cd Vencord
+pnpm install --no-frozen-lockfile
+pnpm install --frozen-lockfile
+pnpm build --dev
+pnpm inject
+```
+what each command does, in order:
+- creates a new folder at C:\Users\[yourcurrentuser]\Vencord and installs the contents of this fork to it
+- moves the terminal into the new Vencord folder
+- installs dependencies
+- installs more dependencies
+- builds a usable version of this Vencord fork from the local files in the new Vencord folder
+- injects that usable version into the Discord client
+
+From there, you can see the new plugins in Discord by going to User Settings > Plugins.
+
+#### :warning: **DISCORD UPDATES WILL OCCASIONALLY REMOVE VENCORD!!** :warning: 
+Discord updates automatically when restarted, and sometimes an update will make a change to Discord's core files, prompting it to reinstall those files and thus removing the injected Vencord installation.
+
+Every time this happens, **you will need to re-inject the fork.**\
+Instructions for this below:
+- open new cmd/powershell window as non-admin
+- enter these commands:
+```powershell
+cd Vencord
+git pull origin main
+pnpm build --dev
+pnpm inject
+```
+###### Note: These commands can also fix an installation that isn't letting you get to the "update your vencord" button in Discord.
+
+If updating and reinjecting the fork like this doesn't fix an issue you're seeing, contact me (@letter_t on discord)
+
+</details>
+
+<details>
+<summary>**Linux (TLDR version)**</summary>
+
+open terminal and run the following:
+```bash
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
+\. "$HOME/.nvm/nvm.sh"
+nvm install 22
+node -v
+# npm install -g pnpm # might not be necessary
+pnpm -v
+```
+go to https://git-scm.com/downloads/linux and follow instructions to install git
+
+reopen terminal and run the following:
+```
+git clone https://github.com/letter-t/Vencord
+cd Vencord
+pnpm install --no-frozen-lockfile
+pnpm install --frozen-lockfile
+pnpm build --dev
+pnpm inject
+```
+
+You can see the new plugins in Discord by going to User Settings > Plugins.
+
+#### :warning: **DISCORD UPDATES WILL OCCASIONALLY REMOVE VENCORD!!** :warning: 
+When your Discord reverts back to not having this Vencord fork:
+
+open terminal and enter these commands:
+```bash
+cd Vencord
+git pull origin main
+pnpm build --dev
+pnpm inject
+```
+###### Note: These commands can also fix an installation that isn't letting you get to the "update your vencord" button in Discord.
+
+If updating and reinjecting the fork like this doesn't fix an issue you're seeing, contact me (@letter_t on discord)
+
+</details>
+
+<details>
+<summary>**Linux (full explanation)**</summary>
+
+You'll need some version of Node.js for this. Installation via nvm is shown here, but other methods should work too.
+nvm-sh:
+```bash
+# Download and install nvm:
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
+# in lieu of restarting the shell
+\. "$HOME/.nvm/nvm.sh"
+# Download and install Node.js:
+nvm install 22
+# Verify the Node.js version:
+node -v # Should print "v22.20.0".
+# Verify the pnpm version: 
+pnpm -v
+
+# if no pnpm version:
+npm install -g pnpm
+```
+
+You should now have node.js and pnpm installed on your system.
+
+You'll also need to have some version of git on your system as well:
+- go to https://git-scm.com/downloads/linux and follow instructions
+- do `git -v` to check if git was installed properly
+
+Next, run these commands in the terminal to download this repo locally to your device (any location works, but you'll have to change the `cd Vencord` line to match the new filepath)
+```bash
+git clone https://github.com/letter-t/Vencord
+cd Vencord
+pnpm install --no-frozen-lockfile
+pnpm install --frozen-lockfile
+pnpm build --dev
+pnpm inject
+```
+what each command does, in order:
+- creates a new folder at /Vencord and installs the contents of this github repo to it
+- moves the terminal into the new Vencord folder
+- installs dependencies
+- installs more dependencies
+- builds a usable version of this Vencord fork from the local files in the new Vencord folder
+- injects that usable version into the Discord client
+
+From there, you can see the new plugins in Discord by going to User Settings > Plugins.
+
+#### :warning: **DISCORD UPDATES WILL OCCASIONALLY REMOVE VENCORD!!** :warning: 
+Discord updates automatically when restarted, and sometimes an update will make a change to Discord's core files, prompting it to reinstall those files and thus removing the injected Vencord installation.
+
+Every time this happens, **you will need to re-inject the fork.**\
+Instructions for this below:
+- open terminal
+- enter these commands:
+```bash
+cd Vencord
+git pull origin main
+pnpm build --dev
+pnpm inject
+```
+###### Note: These commands can also fix an installation that isn't letting you get to the "update your vencord" button in Discord.
+
+If updating and reinjecting the fork like this doesn't fix an issue you're seeing, contact me (@letter_t on discord)
+
+</details>
+
+## Editing these plugins on your own (advanced)
+
+<details>
+<summary>Show Contents</summary>
+
+Useful links:
+
+https://github.com/Vendicated/Vencord/blob/0fd094074941b8d9bb7c0349eec7efe80e196ae5/docs/1_INSTALLING.md (this file is from a past Vencord repo)
+
+https://github.com/Vendicated/Vencord/blob/0fd094074941b8d9bb7c0349eec7efe80e196ae5/docs/2_PLUGINS.md (this file is from a past Vencord repo)
+
+https://github.com/Vendicated/Vencord/blob/main/CONTRIBUTING.md
+
+https://docs.vencord.dev/installing/custom-plugins/
+
+https://docs.vencord.dev/plugins/
+
+Good luck o7
+
+</details>
 
 ## Disclaimer
 
