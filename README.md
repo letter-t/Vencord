@@ -20,7 +20,7 @@ Kept up-to-date every few days; contact me (@letter_t on Discord) if you're havi
 
 ## Installation Guides
 <details>
-<summary>**Windows (TLDR version)**</summary>
+<summary>Windows (TLDR version)</summary>
 
 open cmd or powershell window and enter these commands:
 ```powershell
@@ -59,7 +59,7 @@ If updating and reinjecting the fork like this doesn't fix an issue you're seein
 </details>
 
 <details>
-<summary>**Windows (full explanation)**</summary>
+<summary>Windows (full explanation)</summary>
 
 You'll need some version of Node.js for this. I'd recommend using nvm-windows (Node Version Manager for Windows), but a standalone install works fine too.
 
@@ -127,7 +127,7 @@ If updating and reinjecting the fork like this doesn't fix an issue you're seein
 </details>
 
 <details>
-<summary>**Linux (TLDR version)**</summary>
+<summary>Linux (TLDR version)</summary>
 
 open terminal and run the following:
 ```bash
@@ -169,7 +169,7 @@ If updating and reinjecting the fork like this doesn't fix an issue you're seein
 </details>
 
 <details>
-<summary>**Linux (full explanation)**</summary>
+<summary>Linux (full explanation)</summary>
 
 You'll need some version of Node.js for this. Installation via nvm is shown here, but other methods should work too.
 nvm-sh:
