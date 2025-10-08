@@ -160,7 +160,7 @@ cd Vencord
 pnpm install --no-frozen-lockfile
 pnpm install --frozen-lockfile
 pnpm build --dev
-sudo pnpm inject
+sudo env "PATH=$PATH" pnpm inject
 ```
 
 You can see the new plugins in Discord by going to User Settings > Plugins.
@@ -173,7 +173,7 @@ When your Discord reverts back to not having this Vencord fork:
 cd Vencord
 git pull origin main
 pnpm build --dev
-sudo pnpm inject
+sudo env "PATH=$PATH" pnpm inject
 ```
 ###### Note: These commands can also fix an installation that isn't letting you get to the "update your vencord" button in Discord.
 
@@ -218,7 +218,7 @@ cd Vencord
 pnpm install --no-frozen-lockfile
 pnpm install --frozen-lockfile
 pnpm build --dev
-sudo pnpm inject
+sudo env "PATH=$PATH" pnpm inject
 ```
 what each command does, in order:
 - creates a new folder at /Vencord and installs the contents of this github repo to it
@@ -241,7 +241,7 @@ Instructions for this below:
 cd Vencord
 git pull origin main
 pnpm build --dev
-sudo pnpm inject
+sudo env "PATH=$PATH" pnpm inject
 ```
 ###### Note: These commands can also fix an installation that isn't letting you get to the "update your vencord" button in Discord.
 
