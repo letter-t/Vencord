@@ -22,6 +22,8 @@ Kept up-to-date every few days; contact me (@letter_t on Discord) if you're havi
 <details>
 <summary>Windows (TLDR version)</summary>
 
+---
+
 open cmd or powershell window and enter these commands:
 ```powershell
 winget install -e --id CoreyButler.NVMforWindows
@@ -42,10 +44,10 @@ pnpm inject
 
 You can see the new plugins in Discord by going to User Settings > Plugins.
 
-#### :warning: **DISCORD UPDATES WILL OCCASIONALLY REMOVE VENCORD!!** :warning: 
+### :warning: **DISCORD UPDATES WILL OCCASIONALLY REMOVE VENCORD!!** :warning: 
 When your Discord reverts back to not having this Vencord fork:
 
-open new cmd/powershell window as non-admin, then enter these commands:
+- open new cmd/powershell window as non-admin, then enter these commands:
 ```powershell
 cd Vencord
 git pull origin main
@@ -56,10 +58,14 @@ pnpm inject
 
 If updating and reinjecting the fork like this doesn't fix an issue you're seeing, contact me (@letter_t on discord)
 
+---
+
 </details>
 
 <details>
 <summary>Windows (full explanation)</summary>
+
+---
 
 You'll need some version of Node.js for this. I'd recommend using nvm-windows (Node Version Manager for Windows), but a standalone install works fine too.
 
@@ -107,7 +113,7 @@ what each command does, in order:
 
 From there, you can see the new plugins in Discord by going to User Settings > Plugins.
 
-#### :warning: **DISCORD UPDATES WILL OCCASIONALLY REMOVE VENCORD!!** :warning: 
+### :warning: **DISCORD UPDATES WILL OCCASIONALLY REMOVE VENCORD!!** :warning: 
 Discord updates automatically when restarted, and sometimes an update will make a change to Discord's core files, prompting it to reinstall those files and thus removing the injected Vencord installation.
 
 Every time this happens, **you will need to re-inject the fork.**\
@@ -124,10 +130,14 @@ pnpm inject
 
 If updating and reinjecting the fork like this doesn't fix an issue you're seeing, contact me (@letter_t on discord)
 
+---
+
 </details>
 
 <details>
 <summary>Linux (TLDR version)</summary>
+
+---
 
 open terminal and run the following:
 ```bash
@@ -152,10 +162,10 @@ pnpm inject
 
 You can see the new plugins in Discord by going to User Settings > Plugins.
 
-#### :warning: **DISCORD UPDATES WILL OCCASIONALLY REMOVE VENCORD!!** :warning: 
+### :warning: **DISCORD UPDATES WILL OCCASIONALLY REMOVE VENCORD!!** :warning: 
 When your Discord reverts back to not having this Vencord fork:
 
-open terminal and enter these commands:
+- open terminal and enter these commands:
 ```bash
 cd Vencord
 git pull origin main
@@ -166,10 +176,14 @@ pnpm inject
 
 If updating and reinjecting the fork like this doesn't fix an issue you're seeing, contact me (@letter_t on discord)
 
+---
+
 </details>
 
 <details>
 <summary>Linux (full explanation)</summary>
+
+---
 
 You'll need some version of Node.js for this. Installation via nvm is shown here, but other methods should work too.
 nvm-sh:
@@ -214,7 +228,7 @@ what each command does, in order:
 
 From there, you can see the new plugins in Discord by going to User Settings > Plugins.
 
-#### :warning: **DISCORD UPDATES WILL OCCASIONALLY REMOVE VENCORD!!** :warning: 
+### :warning: **DISCORD UPDATES WILL OCCASIONALLY REMOVE VENCORD!!** :warning: 
 Discord updates automatically when restarted, and sometimes an update will make a change to Discord's core files, prompting it to reinstall those files and thus removing the injected Vencord installation.
 
 Every time this happens, **you will need to re-inject the fork.**\
@@ -231,9 +245,11 @@ pnpm inject
 
 If updating and reinjecting the fork like this doesn't fix an issue you're seeing, contact me (@letter_t on discord)
 
+---
+
 </details>
 
-## Editing these plugins on your own (advanced)
+## Editing the plugins on your own (advanced)
 
 <details>
 <summary>Show Contents</summary>
