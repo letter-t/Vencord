@@ -33,6 +33,7 @@ close and re-open cmd/powershell (without using "Run as administrator")
 ```powershell
 nvm install 22.20.0
 nvm use 22.20.0
+npm install -g pnpm
 
 git clone https://github.com/letter-t/Vencord
 cd Vencord
@@ -77,14 +78,16 @@ For installing Node.js with **nvm-windows**:
 - do `nvm install 22.20.0` (or any version; `nvm install latest` also works)
 - do `nvm use 22.20.0` (or whatever version you got)
 - do `node -v` to check if node.js has been installed properly
-- do `pnpm -v` to check if pnpm works (should come with the node installation)
+- do `npm install -g pnpm` to install pnpm
+- do `pnpm -v` to check if pnpm works
 
 For installing **Node.js directly**:
 - go to https://nodejs.org/en/download and click the green button that says "Windows Installer (.msi)"
 - run the msi
 - open a new cmd or powershell or terminal window (you may need to close other cmd/powershell/terminal windows you have open before this)
 - do `node -v` to check if node.js has been installed properly
-- do `pnpm -v` to check if pnpm works (should come with the node installation)
+- do `npm install -g pnpm` to install pnpm
+- do `pnpm -v` to check if pnpm works
 
 You should now have node.js and pnpm installed on your system.
 
@@ -94,7 +97,7 @@ You'll also need to have some version of git on your system as well:
 - close and reopen your cmd/powershell windows to make sure git applies
 - do `git -v` to check if git was installed properly
 
-Next, run these commands in a cmd/powershell window to download this fork locally to your device at `C:\Users\[yourcurrentuser]\Vencord\` (any location works, but you'll have to change the `cd Vencord` line to match the new filepath)
+Next, run these commands in a cmd/powershell window (without using "Run as administrator") to download this fork locally to your device at `C:\Users\[yourcurrentuser]\Vencord\` (any location works, but you'll have to change the `cd Vencord` line to match the new filepath)
 ```powershell
 git clone https://github.com/letter-t/Vencord
 cd Vencord
@@ -145,7 +148,7 @@ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
 \. "$HOME/.nvm/nvm.sh"
 nvm install 22
 node -v
-# npm install -g pnpm # might not be necessary
+npm install -g pnpm
 pnpm -v
 ```
 go to https://git-scm.com/downloads/linux and follow instructions to install git
@@ -196,11 +199,10 @@ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
 nvm install 22
 # Verify the Node.js version:
 node -v # Should print "v22.20.0".
+# Download and install pnpm:
+npm install -g pnpm
 # Verify the pnpm version: 
 pnpm -v
-
-# if no pnpm version:
-npm install -g pnpm
 ```
 
 You should now have node.js and pnpm installed on your system.
