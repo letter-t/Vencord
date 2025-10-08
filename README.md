@@ -6,7 +6,7 @@ Check out the original Vencord [here](https://github.com/Vendicated/Vencord)
 
 Kept up-to-date every few days; contact me (@letter_t on Discord) if you're having problems even after updating + reinjecting this fork
 
-<ins>Installation instructions for both Windows and Linux below<\ins>
+<ins>Installation instructions for both Windows and Linux below
 
 ## Custom Plugins
 -   **AutoHideMedia**: automatically hide images, gifs, videos, and stickers from certain users, or upon finding certain keywords in the link or file name
