@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { copyWithToast } from "@utils/misc";
+import { copyWithToast } from "@utils/discord";
 import definePlugin from "@utils/types";
 
 var curKey: string | null = null,
