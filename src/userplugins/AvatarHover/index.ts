@@ -11,19 +11,19 @@ var curKey: string | null = null,
     lastTarget: any = null,
     element: HTMLDivElement | null = null;
 const size: number = 300;
-const qualifier: string = [".wrapper__6e9f8", // <- guilds
+const qualifier: string = ["._6e9f8dce4cc18de3-wrapper", // <- guilds
     ".avatar__07f91", // <- voip, DM channels
     ".avatar__0a06e, .avatar__20a53", // <- friends list
-    ".contents_c19a55 .avatar_c19a55, .replyAvatar_c19a55, .emojiContainer__75abc", // <- messages, embeds
-    ".wrapper__44b0c, .avatar_c19a55", // <- channel users
-    ".callAvatarWrapper-3Ax_xH, .userAvatar__55bab", // <- DM call, server VC
+    ".c19a557985eb7793-contents .c19a557985eb7793-avatar, .c19a557985eb7793-replyAvatar, .emojiContainer__75abc", // <- messages, embeds
+    "._44b0c28be7879b7b-wrapper, .c19a557985eb7793-avatar", // <- channel users
+    ".callAvatarWrapper-3Ax_xH, ._55bab3f0b2555838-userAvatar, ._07f9193042954787-avatar", // <- DM call, server VC
     ".avatar_c51b4e, .avatarHoverTarget_f89da9, .avatar_ec3b75", // <- modals, userpopout
-    ".emojiContainer_bae8cb .emoji, .repliedTextPreview_c19a55", // <- emojis, name icons
+    ".emojiContainer_bae8cb .emoji, .c19a557985eb7793-repliedTextPreview", // <- emojis, name icons
     ".reaction_fef95b .emoji, .emoji_f2bfbb, .emoji", // <- reactions
-    ".emojiItem_fc7141, .emojiItemMedium_fc7141", // <- emoji menu
+    ".fc7141859aaa98b7-emojiItem, .fc7141859aaa98b7-emojiItemMedium", // <- emoji menu
     ".stickerAsset__31fc2", // <- stickers
-    ".roleIcon__1e6f1", // <- role icons
-    ".guildIcon__48112", // <- mini guild pic
+    ".ee71ee16cc02184d-roleIcon", // <- role icons
+    ".d5cd2da5733d0b6e-guildIcon, .f34534e8a5d3ca64-icon", // <- mini guild pic
     ".assetsLargeImageUserPopout__6fc87, .assetsLargeImageUserPopoutV2__01dc1, .assetsLargeImageStreamPreview_db91fd", // <- playing on profile part 1
     ".assetsLargeImageStreamPreviewXbox_c549ba, .assetsLargeImageUserPopoutXbox__908da, .assetsLargeImageUserPopoutV2Xbox__32def", // <- playing on profile part 2
     ".customStatus__90402 .customStatusEmoji_fd509e", // <- emoji in custom status on big profile view
