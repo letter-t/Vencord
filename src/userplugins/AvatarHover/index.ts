@@ -6,26 +6,109 @@
 
 import { copyWithToast } from "@utils/discord";
 import definePlugin from "@utils/types";
+import { findByPropsLazy } from "@webpack";
+import { EmojiStore } from "@webpack/common";
+
+const EmojiParser = findByPropsLazy("convertSurrogateToName");
+const EmojiUtils = findByPropsLazy("getURL", "getEmojiColors");
+
+interface Emoji {
+    t: "Emoji";
+    id: string;
+    name: string;
+    isAnimated: boolean;
+}
+
+async function fetchBlob(url: string, data) {
+    const MAX_SIZE = 256 * 1024;
+
+    for (let size = 4096; size >= 16; size /= 2) {
+        url.replace(/size=[0-9]+/, `size=${size}`);
+        const res = await fetch(url);
+        if (!res.ok)
+            throw new Error(`Failed to fetch ${url} - ${res.status}`);
+
+        const blob = await res.blob();
+        if (blob.size <= MAX_SIZE)
+            return blob;
+    }
+
+    throw new Error(`Failed to fetch ${data.t} within size limit of ${MAX_SIZE / 1000}kB`);
+}
+
+async function copyEmoji(url: string, emoji) {
+    let imageData = await fetchBlob(url, emoji);
+    const resize = 48;
+
+    // const dataUrl = await new Promise<string>(resolve => {
+    //     const reader = new FileReader();
+    //     reader.onload = () => resolve(reader.result as string);
+    //     reader.readAsDataURL(data);
+    // });
+
+    // let imageData = await fetch(url).then(r => r.blob());
+    // if (imageData.type !== "image/png") {
+    //     const bitmap = await createImageBitmap(imageData);
+
+    //     const canvas = document.createElement("canvas");
+    //     canvas.width = resize;
+    //     canvas.height = resize;
+    //     canvas.getContext("2d")!.drawImage(bitmap, 0, 0, resize, resize); // this is changed to resize the image to emoji-size
+
+    //     await new Promise<void>(done => {
+    //         canvas.toBlob(data => {
+    //             imageData = data!;
+    //             done();
+    //         }, "image/png");
+    //     });
+    // }
+    const bitmap = await createImageBitmap(imageData);
+
+    const canvas = document.createElement("canvas");
+    canvas.width = resize;
+    canvas.height = resize;
+    canvas.getContext("2d")!.drawImage(bitmap, 0, 0, resize, resize); // this is changed to resize the image to emoji-size
+
+    await new Promise<void>(done => {
+        canvas.toBlob(data => {
+            imageData = data!;
+            done();
+        }, "image/png");
+    });
+
+    if (IS_VESKTOP && VesktopNative.clipboard) {
+        VesktopNative.clipboard.copyFile(await imageData.arrayBuffer(), url);
+        return;
+    } else {
+        navigator.clipboard.write([
+            new ClipboardItem({
+                "image/png": imageData
+            })
+        ]);
+    }
+}
 
 var curKey: string | null = null,
     lastTarget: any = null,
     element: HTMLDivElement | null = null;
 const size: number = 300;
-const qualifier: string = ["._6e9f8dce4cc18de3-wrapper", // <- guilds
+const qualifier: string = [".wrapper__6e9f8", // <- guilds
     ".avatar__07f91", // <- voip, DM channels
     ".avatar__0a06e, .avatar__20a53", // <- friends list
-    ".c19a557985eb7793-contents .c19a557985eb7793-avatar, .c19a557985eb7793-replyAvatar, .emojiContainer__75abc", // <- messages, embeds
-    "._44b0c28be7879b7b-wrapper, .c19a557985eb7793-avatar", // <- channel users
-    ".callAvatarWrapper-3Ax_xH, ._55bab3f0b2555838-userAvatar, ._07f9193042954787-avatar", // <- DM call, server VC
+    ".contents_c19a55 .avatar_c19a55, .replyAvatar_c19a55, .emojiContainer__75abc", // <- messages, embeds
+    ".wrapper__44b0c, .avatar_c19a55", // <- channel users
+    ".callAvatarWrapper-3Ax_xH, .userAvatar__55bab, .avatar__07f91", // <- DM call, server VC
     ".avatar_c51b4e, .avatarHoverTarget_f89da9, .avatar_ec3b75", // <- modals, userpopout
-    ".emojiContainer_bae8cb .emoji, .c19a557985eb7793-repliedTextPreview", // <- emojis, name icons
+    ".emojiContainer_bae8cb .emoji, .repliedTextPreview_c19a55", // <- emojis, name icons
     ".reaction_fef95b .emoji, .emoji_f2bfbb, .emoji", // <- reactions
-    ".fc7141859aaa98b7-emojiItem, .fc7141859aaa98b7-emojiItemMedium", // <- emoji menu
+    ".emojiItem_fc7141, .emojiItemMedium_fc7141", // <- emoji menu
     ".stickerAsset__31fc2", // <- stickers
-    ".ee71ee16cc02184d-roleIcon", // <- role icons
-    ".d5cd2da5733d0b6e-guildIcon, .f34534e8a5d3ca64-icon", // <- mini guild pic
+    ".roleIcon_ee71ee", // <- role icons
+    ".guildIcon_d5cd2d, .icon_f34534", // <- mini guild pic
     ".assetsLargeImageUserPopout__6fc87, .assetsLargeImageUserPopoutV2__01dc1, .assetsLargeImageStreamPreview_db91fd", // <- playing on profile part 1
     ".assetsLargeImageStreamPreviewXbox_c549ba, .assetsLargeImageUserPopoutXbox__908da, .assetsLargeImageUserPopoutV2Xbox__32def", // <- playing on profile part 2
+    ".gameIcon__8c6c2, .icon_c2a763 img, .coverContainer__1a3d6", // <- playing on profile part 3
+    ".badge__8061a", // <- badges on profile
     ".customStatus__90402 .customStatusEmoji_fd509e", // <- emoji in custom status on big profile view
     ".embedAuthorIcon__6b055" // <- profile icon in bot messages
 ].filter(function (s) {
@@ -90,12 +173,9 @@ function getImgUrl(target: any): string | undefined {
     if (!url && target?.style.backgroundImage !== "") url = target.style.backgroundImage.match(/(?<=url\(").*(?="\))/)?.[0] || null;
     if (!url) return;
     url = url.replace(/.*https\/(?=[^/])/, "https://")
-        .replace("&quality=lossless", "")
-        .replace(/(?<=\?size=)[0-9]+(?=\?|$)/, `${size * 2}`)
-        .replace(/(?<!size=[0-9]+)$/, `?size=${size * 2}`)
-        .replace(".webp", ".png")
-        .replace(/\.png\?size=[0-9]+&animated=true/, ".gif")
-        + "&quality=lossless";
+        .replace(/[?&](quality=lossless|animated=true|passthrough=false|size=[0-9]+)/, "")
+        .replace(/\.[a-z0-9]+((?=&)|$)/, match => { return `${match}?size=${size * 2}`; })
+        + "&quality=lossless&animated=true";
     url = url.match(/(\/assets\/).*(\.svg)/)?.[0] || url;
     return url;
 }
@@ -106,8 +186,20 @@ function makeDiv() {
     avatarHover[0].appendChild(hoverCard);
 }
 async function copyUrl({ target }: any) {
+
     const isShown = (curKey === "Control");
     const url = getImgUrl(target);
+
+
+    console.log(`${url}`); // ////////////////////
+    if (!url) return;
+    const emojiId = url.match(/(?<=https:\/\/cdn.discordapp.com\/emojis\/)[0-9]+/)?.[0];
+    if (!emojiId) return;
+    const emoji = EmojiStore.getCustomEmojiById(emojiId);
+    if (!emoji) return;
+    // copyEmoji(url, emoji);
+
+
     if (!(isShown && url)) return;
     copyWithToast(url, "Image copied to clipboard!");
     await new Promise(r => setTimeout(r, 5000));
