@@ -191,7 +191,7 @@ async function copyUrl({ target }: any) {
     const url = getImgUrl(target);
 
 
-    console.log(`${url}`); // ////////////////////
+    // console.log(`${url}`); // ////////////////////
     if (!url) return;
     const emojiId = url.match(/(?<=https:\/\/cdn.discordapp.com\/emojis\/)[0-9]+/)?.[0];
     if (!emojiId) return;
