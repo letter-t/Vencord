@@ -97,7 +97,7 @@ const qualifier: string = [".wrapper__6e9f8", // <- guilds
     ".avatar__0a06e, .avatar__20a53", // <- friends list
     ".contents_c19a55 .avatar_c19a55, .replyAvatar_c19a55, .emojiContainer__75abc", // <- messages, embeds
     ".wrapper__44b0c, .avatar_c19a55", // <- channel users
-    ".callAvatarWrapper-3Ax_xH, .userAvatar__55bab, .avatar__07f91", // <- DM call, server VC
+    ".callAvatarWrapper-3Ax_xH, .userAvatar__55bab, .avatar__183c2", // <- DM call, server VC
     ".avatar_c51b4e, .avatarHoverTarget_f89da9, .avatar_ec3b75", // <- modals, userpopout
     ".emojiContainer_bae8cb .emoji, .repliedTextPreview_c19a55", // <- emojis, name icons
     ".reaction_fef95b .emoji, .emoji_f2bfbb, .emoji", // <- reactions

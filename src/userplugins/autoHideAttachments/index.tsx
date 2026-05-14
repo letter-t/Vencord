@@ -42,8 +42,7 @@ async function saveHiddenMessages(ids: Set<string>) {
 }
 
 // migratePluginSettings("AutoHideMedia", "AutoHideAttachments");
-
-const hasMedia = (msg: Message) => msg.attachments.length > 0 || msg.embeds.length > 0 || msg.stickerItems.length > 0;
+const hasMedia = (msg: Message) => msg.attachments.length > 0 || msg.embeds.length > 0 || msg.stickerItems.length > 0 || msg.components.length > 0;
 const hasKeyword = (msg: Message) => (msg.content.match(new RegExp(("(?<!<)https:\\/\\/[^ ]*" + settings.store.hiddenKeywords.split(/[ ,]+/).join("|") + "[^ ]*\\b"), "giu"))
     || msg.attachments[0]?.filename?.match(new RegExp(settings.store.hiddenKeywords.split(/[ ,]+/).join("|"), "giu"))
     || msg?.stickerItems?.[0]?.name?.match(new RegExp(settings.store.hiddenKeywords.split(/[ ,]+/).join("|"), "giu")));
@@ -70,6 +69,15 @@ const settings = definePluginSettings({
     }
 });
 
+async function toggleHide(channelId: string, messageId: string) {
+    const ids = await getHiddenMessages();
+    if (!ids.delete(messageId))
+        ids.add(messageId);
+
+    await saveHiddenMessages(ids);
+    updateMessage(channelId, messageId);
+}
+
 export default definePlugin({
     name: "AutoHideMedia",
     description: "Automatically hide attachments and embeds from certain users or with certain keywords. Manually hide/unhide with hover button. REPLACES HIDEMEDIA",
@@ -85,7 +93,7 @@ export default definePlugin({
     patches: [{
         find: "this.renderAttachments(",
         replacement: {
-            match: /(?<=\i=)this\.render(?:Attachments|Embeds|StickersAccessories)\((\i)\)/g,
+            match: /(?<=\i=)this\.render(?:Attachments|Embeds|StickersAccessories|ComponentAccessories)\((\i)\)/g,
             replace: "$self.shouldHideMedia($1?.id)?null:$&"
         }
     }],
@@ -119,18 +127,21 @@ export default definePlugin({
         }
     },
 
-    renderMessagePopoverButton(msg) {
-        if (!hasMedia(msg) && !msg.messageSnapshots.some(s => hasMedia(s.message))) return null;
+    messagePopoverButton: {
+        icon: ImageInvisible,
+        render(msg) {
+            if (!hasMedia(msg) && !msg.messageSnapshots.some(s => hasMedia(s.message))) return null;
 
-        const isHidden = hiddenMessages.has(msg.id);
+            const isHidden = hiddenMessages.has(msg.id);
 
-        return {
-            label: isHidden ? "Show Media" : "Hide Media",
-            icon: isHidden ? ImageVisible : ImageInvisible,
-            message: msg,
-            channel: ChannelStore.getChannel(msg.channel_id),
-            onClick: () => this.toggleHide(msg.channel_id, msg.id)
-        };
+            return {
+                label: isHidden ? "Show Media" : "Hide Media",
+                icon: isHidden ? ImageVisible : ImageInvisible,
+                message: msg,
+                channel: ChannelStore.getChannel(msg.channel_id),
+                onClick: () => toggleHide(msg.channel_id, msg.id)
+            };
+        },
     },
 
     renderMessageAccessory({ message }) {
@@ -153,14 +164,5 @@ export default definePlugin({
 
     shouldHideMedia(messageId: string) {
         return hiddenMessages.has(messageId);
-    },
-
-    async toggleHide(channelId: string, messageId: string) {
-        const ids = await getHiddenMessages();
-        if (!ids.delete(messageId))
-            ids.add(messageId);
-
-        await saveHiddenMessages(ids);
-        updateMessage(channelId, messageId);
     }
 });

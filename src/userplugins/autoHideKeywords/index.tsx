@@ -87,6 +87,16 @@ const settings = definePluginSettings({
     }
 });
 
+async function toggleHide(channelId: string, messageId: string) {
+        const ids = await getHiddenMessages();
+        if (!ids.delete(messageId))
+            ids.add(messageId);
+
+        await saveHiddenMessages(ids);
+        // updateMessage(channelId, messageId);
+        await buildCss();
+    }
+
 export default definePlugin({
     name: "AutoHideKeywords",
     description: "Automatically hide individual messages with keywords, manually hide/unhide via hover button",
@@ -138,57 +148,33 @@ export default definePlugin({
         }
     },
 
-    renderMessagePopoverButton(msg) {
-        if (!hasKeyword(msg)) return null;
+    messagePopoverButton: {
+        icon: NotesIcon,
+        render(msg) {
+            if (!hasKeyword(msg)) return null;
 
-        const isHidden = hiddenMessages.has(msg.id);
+            const isHidden = hiddenMessages.has(msg.id);
 
-        return {
-            label: isHidden ? "Show Text" : "Hide Text",
-            icon: isHidden ? NotesIcon : NotesIcon,
-            // style: "color: var(--text-danger);",
-            message: msg,
-            channel: ChannelStore.getChannel(msg.channel_id),
-            onClick: () => this.toggleHide(msg.channel_id, msg.id)
-        };
+            return {
+                label: isHidden ? "Show Text" : "Hide Text",
+                icon: isHidden ? NotesIcon : NotesIcon,
+                message: msg,
+                channel: ChannelStore.getChannel(msg.channel_id),
+                onClick: () => toggleHide(msg.channel_id, msg.id)
+            };
+        },
     },
 
-    // renderMessageAccessory({ message }) {
-    //     if (!this.shouldHideText(message.id)) return null;
-
-    //     return (
-    //         <span className={classes("vc-hideKeywords-accessory", !message.content && "vc-hideKeywords-no-content")}>
-    //             Text Hidden
-    //         </span>
-    //     );
-    // },
-
     async start() {
-        // await getHiddenMessages();
         style = document.createElement("style");
         style.id = "VencordAutoHideKeywords";
         document.head.appendChild(style);
 
         await getHiddenMessages();
         await buildCss();
-
-        // addButton("HideAttachments", msg => {
-        //     if (!msg.attachments.length && !msg.embeds.length && !msg.stickerItems.length) return null;
-
-        //     const isHidden = hiddenMessages.has(msg.id);
-
-        //     return {
-        //         label: isHidden ? "Show Attachments" : "Hide Attachments",
-        //         icon: isHidden ? ImageVisible : ImageInvisible,
-        //         message: msg,
-        //         channel: ChannelStore.getChannel(msg.channel_id),
-        //         onClick: () => this.toggleHide(msg.id)
-        //     };
-        // });
     },
 
     stop() {
-        // hiddenMessages.clear();
         style.remove();
         hiddenMessages.clear();
         // removeButton("HideAttachments");
@@ -196,16 +182,6 @@ export default definePlugin({
 
     shouldHideText(messageId: string) {
         return hiddenMessages.has(messageId);
-    },
-
-    async toggleHide(channelId: string, messageId: string) {
-        const ids = await getHiddenMessages();
-        if (!ids.delete(messageId))
-            ids.add(messageId);
-
-        await saveHiddenMessages(ids);
-        // updateMessage(channelId, messageId);
-        await buildCss();
     }
 });
 
