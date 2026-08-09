@@ -20,7 +20,7 @@ import "./styles.css";
 
 import { get, set } from "@api/DataStore";
 import { updateMessage } from "@api/MessageUpdater";
-import { definePluginSettings } from "@api/Settings";
+import { definePluginSettings, Settings } from "@api/Settings";
 import { ImageInvisible, ImageVisible } from "@components/Icons";
 import { classes } from "@utils/misc";
 import definePlugin, { OptionType } from "@utils/types";
@@ -60,11 +60,13 @@ const settings = definePluginSettings({
     hiddenUsers: {
         description: "Users to hide attachments from",
         type: OptionType.STRING,
+        multiline: true,
         default: "UserID1, UserID2, UserID3, etc"
     },
     hiddenKeywords: {
         description: "Gifs and files with these keywords will be auto-hidden",
         type: OptionType.STRING,
+        multiline: true,
         default: "word1, word2, word3, etc"
     }
 });
