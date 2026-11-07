@@ -92,24 +92,27 @@ var curKey: string | null = null,
     lastTarget: any = null,
     element: HTMLDivElement | null = null;
 const size: number = 300;
-const qualifier: string = [".wrapper__6e9f8", // <- guilds
+const qualifier: string = [".wrapper_JJ-hgR", // <- guilds
     ".avatar__07f91", // <- voip, DM channels
-    ".avatar__0a06e, .avatar__20a53", // <- friends list
-    ".contents_c19a55 .avatar_c19a55, .replyAvatar_c19a55, .emojiContainer__75abc", // <- messages, embeds
-    ".wrapper__44b0c, .avatar_c19a55", // <- channel users
-    ".callAvatarWrapper-3Ax_xH, .userAvatar__55bab, .avatar__183c2", // <- DM call, server VC
+    ".avatar_jPuNMC", // <- friends list
+    ".contents_2i8Bfm .avatar_2i8Bfm, .replyAvatar_2i8Bfm, .emojiContainer__75abc", // <- messages, embeds   .emojiContainer_lTEMT6
+    ".wrapper_XpIUHy, .avatar_2i8Bfm", // <- channel users
+    "img.thumbnail_g7esM5", // <- game thumbnails in channel user list
+    ".callAvatarWrapper-3Ax_xH, .userAvatar__55bab, .avatar_YUoOxm", // <- DM call, server VC
     ".avatar_c51b4e, .avatarHoverTarget_f89da9, .avatar_ec3b75", // <- modals, userpopout
-    ".emojiContainer_bae8cb .emoji, .repliedTextPreview_c19a55", // <- emojis, name icons
+    ".emojiContainer_bae8cb .emoji, .repliedTextPreview_2i8Bfm", // <- emojis, name icons
     ".reaction_fef95b .emoji, .emoji_f2bfbb, .emoji", // <- reactions
-    ".emojiItem_fc7141, .emojiItemMedium_fc7141", // <- emoji menu
+    ".emojiItem_6OcK5D, .emojiItemMedium_6OcK5D, emojiSpriteImage_JBR6wp", // <- emoji menu
     ".stickerAsset__31fc2", // <- stickers
-    ".roleIcon_ee71ee", // <- role icons
-    ".guildIcon_d5cd2d, .icon_f34534", // <- mini guild pic
-    ".assetsLargeImageUserPopout__6fc87, .assetsLargeImageUserPopoutV2__01dc1, .assetsLargeImageStreamPreview_db91fd", // <- playing on profile part 1
-    ".assetsLargeImageStreamPreviewXbox_c549ba, .assetsLargeImageUserPopoutXbox__908da, .assetsLargeImageUserPopoutV2Xbox__32def", // <- playing on profile part 2
-    ".gameIcon__8c6c2, .icon_c2a763 img, .coverContainer__1a3d6", // <- playing on profile part 3
-    ".badge__8061a", // <- badges on profile
-    ".customStatus__90402 .customStatusEmoji_fd509e", // <- emoji in custom status on big profile view
+    ".roleIcon_3jSSrV", // <- role icons
+    ".guildIcon_WScet3, .icon_qqAqr1", // <- mini guild pic
+    // ".assetsLargeImageUserPopout__6fc87, .assetsLargeImageUserPopoutV2__01dc1, .assetsLargeImageStreamPreview_db91fd", // <- playing on profile part 1   .contentImage_1AI0dL
+    // ".assetsLargeImageStreamPreviewXbox_c549ba, .assetsLargeImageUserPopoutXbox__908da, .assetsLargeImageUserPopoutV2Xbox__32def", // <- playing on profile part 2
+    ".contentImage_1AI0dL", // <- playing on profile part 1
+    ".gameIcon__8c6c2, .icon_s6-upr img, .coverContainer__1a3d6", // <- playing on profile part 2
+    ".image_JeyAv-", // <- games on big profile view
+    ".badge_IqWmhA", // <- badges on profile
+    ".statusEmoji_rmCN9_", // <- emoji in custom status on big profile view
     ".embedAuthorIcon__6b055" // <- profile icon in bot messages
 ].filter(function (s) {
     return s !== null;
@@ -170,12 +173,16 @@ function getImgUrl(target: any): string | undefined {
     var url: string | null = null;
     if (target?.src) url = target?.src;
     if (!url) url = target.querySelector("img")?.src;
+    // console.log(target); // ////////////////////
     if (!url && target?.style.backgroundImage !== "") url = target.style.backgroundImage.match(/(?<=url\(").*(?="\))/)?.[0] || null;
     if (!url) return;
-    url = url.replace(/.*https\/(?=[^/])/, "https://")
-        .replace(/[?&](quality=lossless|animated=true|passthrough=false|size=[0-9]+)/, "")
+    url = url.replace(/.*https\/(?=[^/])/, "https://");
+    if (url.match(/https:\/\/cdn.discordapp.com\//)) {
+        url = url.replace(/[?&](quality=lossless|animated=true|passthrough=false|size=[0-9]+)/, "")
         .replace(/\.[a-z0-9]+((?=&)|$)/, match => { return `${match}?size=${size * 2}`; })
-        + "&quality=lossless&animated=true";
+         + "&quality=lossless&animated=true";
+    }
+    // console.log(`${url}`); // ////////////////////
     url = url.match(/(\/assets\/).*(\.svg)/)?.[0] || url;
     return url;
 }
@@ -194,10 +201,12 @@ async function copyUrl({ target }: any) {
     // console.log(`${url}`); // ////////////////////
     if (!url) return;
     const emojiId = url.match(/(?<=https:\/\/cdn.discordapp.com\/emojis\/)[0-9]+/)?.[0];
-    if (!emojiId) return;
-    const emoji = EmojiStore.getCustomEmojiById(emojiId);
-    if (!emoji) return;
-    // copyEmoji(url, emoji);
+    if (emojiId) {
+        const emoji = EmojiStore.getCustomEmojiById(emojiId);
+        if (emoji) {
+            // copyEmoji(url, emoji); // this is for copying the file directly, instead of just the link
+        }
+    }
 
 
     if (!(isShown && url)) return;
